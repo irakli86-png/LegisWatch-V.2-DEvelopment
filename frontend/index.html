@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="LegisWatch — საქართველოს საკანონმდებლო ინიციატივების მონიტორინგი"
+    >
+
+    <title>LegisWatch</title>
+
+
+    <!-- FONTS -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        href="https://fonts.cdnfonts.com/css/cofo-sans"
+        rel="stylesheet"
+    >
+
+
+    <!-- CSS -->
+
+    <link
+        rel="stylesheet"
+        href="style.css?v=102"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="site-header">
+
+    <div class="container header-inner">
+
+        <a
+            href="#home"
+            class="logo"
+        >
+
+            <img
+                src="Assets/legiswatch-logo.png"
+                alt="LegisWatch"
+                class="logo-mark"
+            >
+
+            <div class="logo-info">
+
+                <span class="logo-text">
+                    LegisWatch
+                </span>
+
+                <span class="logo-tagline" data-i18n="header.tagline">
+                    STAY INFORMED. TRACK WHAT MATTERS.
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <nav class="main-nav">
+
+            <a href="#home" class="active" data-i18n="nav.home">HOME</a>
+            <a href="#legislation" data-i18n="nav.legislation">LEGISLATION</a>
+            <a href="#about" data-i18n="nav.about">ABOUT</a>
+            <a href="#how-it-works" data-i18n="nav.howItWorks">HOW IT WORKS</a>
+
+        </nav>
+        <div class="language-switcher" aria-label="Language selector">
+            <button id="languageGeorgian" type="button">ქარ</button>
+            <span>/</span>
+            <button id="languageEnglish" type="button" class="active">ENG</button>
+        </div>
+
+        <div class="header-social">
+
+            <a href="#">
+                f
+            </a>
+
+            <a href="#">
+                X
+            </a>
+
+            <a href="#">
+                ◎
+            </a>
+
+            <a href="#">
+                in
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section
+    id="home"
+    class="hero"
+>
+
+    <div class="container hero-inner">
+
+
+        <div class="hero-content">
+
+            <div class="gold-line"></div>
+
+
+            <h1 data-i18n="hero.title">
+                საკანონმდებლო<br>
+                ინიციატივები<br>
+                <span style="color: #bf0603;">LIVE</span> რეჟიმში
+            </h1>
+
+
+            <p data-i18n="hero.description">
+
+                LegisWatch helps you track new laws,
+                draft bills and parliamentary updates
+                from the Parliament of Georgia —
+                clearly, simply, and in real time.
+
+            </p>
+
+
+            <!-- EMAIL + CHECK BUTTON -->
+
+            <div class="update-form">
+
+                <input
+                    id="emailInput"
+                    type="email"
+                    placeholder="Enter your email address"
+                    data-i18n-placeholder="hero.emailPlaceholder"
+                    autocomplete="email"
+                >
+
+
+                <button
+                    id="checkButton"
+                    class="outline-button"
+                    type="button"
+                >
+
+                    <span id="buttonText" data-i18n="hero.checkUpdates">
+                        CHECK FOR UPDATES
+                    </span>
+
+                    <span class="button-arrow">
+                        →
+                    </span>
+
+                </button>
+
+            </div>
+
+
+            <div
+                id="status"
+                class="status"
+            ></div>
+
+        </div>
+
+
+
+        <div class="hero-visual">
+
+            <img
+                src="Assets/law-books-sketch.png"
+                alt="Legislation illustration"
+                class="law-sketch"
+            >
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FEATURES
+===================================================== -->
+
+<section class="features">
+
+    <div class="container features-grid">
+
+
+        <div class="feature">
+
+    <div class="feature-icon">
+
+        <svg viewBox="0 0 48 48">
+
+            <circle
+                cx="24"
+                cy="24"
+                r="16"
+            />
+
+            <path
+                d="M24 15V24L30 28"
+            />
+
+        </svg>
+
+    </div>
+
+
+    <div>
+
+        <h3 data-i18n="features.track.title">
+            TRACK NEW LEGISLATION
+        </h3>
+
+        <p data-i18n="features.track.description">
+            Follow newly registered
+            legislative initiatives
+            from the Parliament of Georgia.
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<div class="feature">
+
+    <div class="feature-icon">
+
+        <svg viewBox="0 0 48 48">
+
+            <path d="M8 24H40" />
+
+            <path d="M24 8V40" />
+
+            <circle
+                cx="24"
+                cy="24"
+                r="15"
+            />
+
+        </svg>
+
+    </div>
+
+
+    <div>
+
+        <h3 data-i18n="features.realtime.title">
+            REAL-TIME UPDATES
+        </h3>
+
+        <p data-i18n="features.realtime.description">
+            Keep track of the latest
+            parliamentary information
+            in one place.
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<div class="feature">
+
+    <div class="feature-icon">
+
+        <svg viewBox="0 0 48 48">
+
+            <path d="M12 10H36V38H12Z" />
+
+            <path d="M17 17H31" />
+
+            <path d="M17 24H31" />
+
+            <path d="M17 31H27" />
+
+        </svg>
+
+    </div>
+
+
+    <div>
+
+        <h3 data-i18n="features.open.title">
+            OPEN & TRANSPARENT
+        </h3>
+
+        <p data-i18n="features.open.description">
+            Access official legislative
+            information through a clear
+            and simple interface.
+        </p>
+
+    </div>
+
+</div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ABOUT
+===================================================== -->
+
+<section
+    id="about"
+    class="about-section"
+>
+
+    <div class="container about-inner">
+
+
+        <div class="section-heading">
+
+            <div class="gold-line"></div>
+
+
+            <span class="about-label">
+                ABOUT LEGISWATCH
+            </span>
+
+
+            <h2>
+
+                LEGISLATION<br>
+                MADE CLEAR.
+
+            </h2>
+
+        </div>
+
+
+        <div class="about-text">
+
+
+            <p class="about-lead">
+
+                LegisWatch makes Georgian legislation
+                easier to follow.
+
+            </p>
+
+
+            <p>
+
+                The platform monitors newly registered
+                legislative initiatives and presents
+                official parliamentary information in
+                one clear and accessible place.
+
+            </p>
+
+
+            <p>
+
+                Instead of searching through different
+                pages and documents, users can quickly
+                discover recent initiatives and follow
+                their development.
+
+            </p>
+
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     HOW IT WORKS
+===================================================== -->
+
+<section
+    id="how-it-works"
+    class="process-section"
+>
+
+    <div class="container">
+
+
+        <div class="process-heading">
+
+            <div class="gold-line"></div>
+
+
+            <span
+                class="process-label"
+                data-i18n="process.label"
+            >
+                HOW IT WORKS
+            </span>
+
+
+            <h2 data-i18n="process.title">
+                FROM PARLIAMENT<br>
+                TO YOUR SCREEN.
+            </h2>
+
+        </div>
+
+
+
+        <div class="process-grid">
+
+
+            <div class="process-item">
+
+                <div class="process-top">
+
+                    <span class="process-number">
+                        01
+                    </span>
+
+                    <span class="process-line"></span>
+
+                </div>
+
+
+                <h3 data-i18n="process.monitor.title">
+                    MONITOR
+                </h3>
+
+
+                <p data-i18n="process.monitor.description">
+
+                    LegisWatch checks official
+                    parliamentary information
+                    for newly registered
+                    legislative initiatives.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="process-item">
+
+                <div class="process-top">
+
+                    <span class="process-number">
+                        02
+                    </span>
+
+                    <span class="process-line"></span>
+
+                </div>
+
+
+                <h3 data-i18n="process.organize.title">
+                    ORGANIZE
+                </h3>
+
+
+                <p data-i18n="process.organize.description">
+
+                    Legislative information is
+                    collected and organized into
+                    a simple and readable format.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="process-item">
+
+                <div class="process-top">
+
+                    <span class="process-number">
+                        03
+                    </span>
+
+                    <span class="process-line"></span>
+
+                </div>
+
+
+                <h3 data-i18n="process.follow.title">
+                    FOLLOW
+                </h3>
+
+
+                <p data-i18n="process.follow.description">
+
+                    Users can quickly discover
+                    legislation and open the
+                    official parliamentary source.
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     RECENT LEGISLATION
+===================================================== -->
+
+<section
+    id="legislation"
+    class="legislation-section"
+>
+
+    <div class="container">
+
+
+        <div class="legislation-header">
+
+
+            <div>
+
+                <div class="gold-line"></div>
+
+                <h2 data-i18n="legislation.title">
+                    RECENT LEGISLATION
+                </h2>
+
+                <p data-i18n="legislation.description">
+                    Latest bills and updates from
+                    the Parliament of Georgia.
+                </p>
+
+            </div>
+
+
+            <a
+                href="#legislation"
+                class="view-all"
+                data-i18n="legislation.viewAll"
+            >
+                VIEW ALL LEGISLATION →
+            </a>
+
+
+        </div>
+
+
+
+        <div class="search-area">
+
+            <input
+                id="searchInput"
+                type="text"
+                placeholder="Search legislation..."
+                data-i18n-placeholder="legislation.searchPlaceholder"
+            >
+
+
+            <button
+                id="searchButton"
+                type="button"
+                data-i18n="legislation.searchButton"
+            >
+                SEARCH
+            </button>
+
+        </div>
+
+
+
+        <div
+            id="resultCount"
+            class="result-count"
+            data-i18n="legislation.resultCount"
+        >
+            0 results
+        </div>
+
+
+
+        <div
+            id="emptyState"
+            class="empty-state"
+        >
+
+            <h3 data-i18n="legislation.emptyTitle">
+                No legislation found
+            </h3>
+
+            <p data-i18n="legislation.emptyDescription">
+                Try another search.
+            </p>
+
+        </div>
+
+
+
+        <div
+            id="results"
+            class="results"
+        ></div>
+
+
+
+        <div class="pagination">
+
+
+            <button
+                id="previousButton"
+                type="button"
+                disabled
+                data-i18n="legislation.previous"
+            >
+                ← PREVIOUS
+            </button>
+
+
+            <span id="pageNumber">
+                1
+            </span>
+
+
+            <button
+                id="nextButton"
+                type="button"
+                data-i18n="legislation.next"
+            >
+                NEXT →
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     TEST NOTICE
+===================================================== -->
+
+<section class="test-notice">
+
+    <div class="container notice-inner">
+
+        <span
+            class="notice-label"
+            data-i18n="testNotice.label"
+        >
+            TEST MODE
+        </span>
+
+        <p data-i18n="testNotice.description">
+            LegisWatch is currently operating
+            in a development and testing environment.
+        </p>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+    <div class="container footer-inner">
+
+
+        <div class="footer-brand">
+
+            <strong>
+                LegisWatch
+            </strong>
+
+            <span data-i18n="footer.tagline">
+                Georgian Legislative Monitoring
+            </span>
+
+        </div>
+
+
+        <nav class="footer-nav">
+
+            <a
+                href="#home"
+                data-i18n="footer.home"
+            >
+                HOME
+            </a>
+
+            <a
+                href="#legislation"
+                data-i18n="footer.legislation"
+            >
+                LEGISLATION
+            </a>
+
+            <a
+                href="#about"
+                data-i18n="footer.about"
+            >
+                ABOUT
+            </a>
+
+        </nav>
+
+
+        <div class="footer-copy">
+
+            © 2026 LegisWatch
+
+        </div>
+
+
+    </div>
+
+</footer>
+
+
+
+<!-- JAVASCRIPT -->
+
+<script src="script.js?v=100"></script>
+
+
+</body>
+
+</html>

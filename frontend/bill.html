@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Bill Details | LegisWatch</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="site-header">
+
+        <div class="container header-inner">
+
+
+            <!-- LOGO -->
+
+            <a
+                href="index.html#home"
+                class="logo"
+            >
+
+                <img
+                    src="Assets/legiswatch-logo.png"
+                    alt="LegisWatch"
+                    class="logo-mark"
+                >
+
+                <div class="logo-info">
+
+                    <span class="logo-text">
+                        LegisWatch
+                    </span>
+
+                    <span class="logo-tagline">
+                        STAY INFORMED. TRACK WHAT MATTERS.
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <!-- NAVIGATION -->
+
+            <nav class="main-nav">
+
+                <a href="index.html#home">
+                    HOME
+                </a>
+
+                <a
+                    href="index.html#legislation"
+                    class="active"
+                >
+                    LEGISLATION
+                </a>
+
+                <a href="index.html#about">
+                    ABOUT
+                </a>
+
+                <a href="index.html#how-it-works">
+                    HOW IT WORKS
+                </a>
+
+            </nav>
+
+
+            <!-- SOCIAL -->
+
+            <div class="header-social">
+
+                <a
+                    href="#"
+                    aria-label="Facebook"
+                >
+                    f
+                </a>
+
+                <a
+                    href="#"
+                    aria-label="Instagram"
+                >
+                    ◎
+                </a>
+
+                <a
+                    href="#"
+                    aria-label="LinkedIn"
+                >
+                    in
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         BILL DETAILS
+    ====================================================== -->
+
+    <main class="bill-details-page">
+
+        <div class="container">
+
+
+            <!-- BACK -->
+
+            <a
+                href="index.html#legislation"
+                class="bill-back"
+            >
+                ← BACK TO LEGISLATION
+            </a>
+
+
+            <!-- HEADER -->
+
+            <div class="bill-details-header">
+
+                <div class="gold-line"></div>
+
+                <div
+                    id="billType"
+                    class="bill-type"
+                >
+                    LOADING...
+                </div>
+
+                <h1 id="billName">
+                    Loading legislation...
+                </h1>
+
+            </div>
+
+
+            <!-- DESCRIPTION -->
+
+            <section class="bill-description-section">
+
+                <h2>
+                    DESCRIPTION
+                </h2>
+
+                <p id="billDescription">
+                    Loading description...
+                </p>
+
+            </section>
+
+
+            <!-- INFORMATION -->
+
+            <section class="bill-information">
+
+                <div class="bill-information-grid">
+
+
+                    <!-- REGISTRATION NUMBER -->
+
+                    <div class="bill-field">
+
+                        <span class="bill-field-label">
+                            REGISTRATION NUMBER
+                        </span>
+
+                        <span
+                            id="registrationNumber"
+                            class="bill-field-value"
+                        >
+                            —
+                        </span>
+
+                    </div>
+
+
+                    <!-- REGISTRATION DATE -->
+
+                    <div class="bill-field">
+
+                        <span class="bill-field-label">
+                            REGISTRATION DATE
+                        </span>
+
+                        <span
+                            id="registrationDate"
+                            class="bill-field-value"
+                        >
+                            —
+                        </span>
+
+                    </div>
+
+
+                    <!-- BILL COUNT -->
+
+                    <div class="bill-field">
+
+                        <span class="bill-field-label">
+                            BILL COUNT
+                        </span>
+
+                        <span
+                            id="billCount"
+                            class="bill-field-value"
+                        >
+                            —
+                        </span>
+
+                    </div>
+
+
+                    <!-- CONFIRMED PROCEDURE -->
+
+                    <div class="bill-field">
+
+                        <span class="bill-field-label">
+                            CONFIRMED PROCEDURE
+                        </span>
+
+                        <span
+                            id="confirmedProcedure"
+                            class="bill-field-value"
+                        >
+                            —
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- INITIATOR -->
+
+            <section class="bill-person-section">
+
+                <h2>
+                    INITIATOR
+                </h2>
+
+                <p id="initiator">
+                    —
+                </p>
+
+            </section>
+
+
+            <!-- AUTHOR -->
+
+            <section class="bill-person-section">
+
+                <h2>
+                    AUTHOR
+                </h2>
+
+                <p id="author">
+                    —
+                </p>
+
+            </section>
+
+
+            <!-- PACKAGE -->
+
+            <section class="bill-person-section">
+
+                <h2>
+                    PACKAGE
+                </h2>
+
+                <p id="packageName">
+                    —
+                </p>
+
+            </section>
+
+
+            <!-- OFFICIAL LINK -->
+
+            <div class="bill-official-link">
+
+                <a
+                    id="officialLink"
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    VIEW OFFICIAL PARLIAMENT PAGE →
+                </a>
+
+            </div>
+
+
+            <!-- ERROR -->
+
+            <div
+                id="billError"
+                class="bill-error"
+                style="display: none;"
+            >
+
+                <h2>
+                    Unable to load legislation
+                </h2>
+
+                <p>
+                    The requested legislation could not be found.
+                </p>
+
+                <a href="index.html#legislation">
+                    BACK TO LEGISLATION
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <p>
+                © 2026 LegisWatch. All rights reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         BILL DETAILS JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+        const API_URL =
+            "https://legiswatch-production.up.railway.app";
+
+
+        /*
+         * ვიღებთ bill ID-ს URL-იდან.
+         *
+         * მაგალითად:
+         *
+         * bill.html?id=32366
+         *
+         * აქ billId იქნება:
+         *
+         * 32366
+         */
+
+        const urlParams =
+            new URLSearchParams(
+                window.location.search
+            );
+
+
+        const billId =
+            urlParams.get("id");
+
+
+        /*
+         * HTML ელემენტები
+         */
+
+        const billType =
+            document.getElementById(
+                "billType"
+            );
+
+        const billName =
+            document.getElementById(
+                "billName"
+            );
+
+        const billDescription =
+            document.getElementById(
+                "billDescription"
+            );
+
+        const registrationNumber =
+            document.getElementById(
+                "registrationNumber"
+            );
+
+        const registrationDate =
+            document.getElementById(
+                "registrationDate"
+            );
+
+        const billCount =
+            document.getElementById(
+                "billCount"
+            );
+
+        const confirmedProcedure =
+            document.getElementById(
+                "confirmedProcedure"
+            );
+
+        const initiator =
+            document.getElementById(
+                "initiator"
+            );
+
+        const author =
+            document.getElementById(
+                "author"
+            );
+
+        const packageName =
+            document.getElementById(
+                "packageName"
+            );
+
+        const officialLink =
+            document.getElementById(
+                "officialLink"
+            );
+
+        const billError =
+            document.getElementById(
+                "billError"
+            );
+
+
+        /*
+         * HTML უსაფრთხოებისთვის
+         */
+
+        function escapeHTML(value) {
+
+            return String(
+                value ?? ""
+            )
+
+                .replaceAll(
+                    "&",
+                    "&amp;"
+                )
+
+                .replaceAll(
+                    "<",
+                    "&lt;"
+                )
+
+                .replaceAll(
+                    ">",
+                    "&gt;"
+                )
+
+                .replaceAll(
+                    '"',
+                    "&quot;"
+                )
+
+                .replaceAll(
+                    "'",
+                    "&#039;"
+                );
+
+        }
+
+
+        /*
+         * მონაცემების ჩატვირთვა
+         */
+
+        async function loadBill() {
+
+
+            /*
+             * თუ URL-ში ID საერთოდ არ გვაქვს
+             */
+
+            if (!billId) {
+
+                showError();
+
+                return;
+
+            }
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_URL}/bills/${billId}`
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Bill not found"
+                    );
+
+                }
+
+
+                const bill =
+                    await response.json();
+
+
+                /*
+                 * მონაცემების გამოტანა
+                 */
+
+                billType.textContent =
+                    bill.bill_type || "LEGISLATION";
+
+
+                billName.textContent =
+                    bill.bill_name || "Untitled legislation";
+
+
+                billDescription.textContent =
+                    bill.bill_description ||
+                    "Description not available.";
+
+
+                registrationNumber.textContent =
+                    bill.registration_number ||
+                    "—";
+
+
+                registrationDate.textContent =
+                    bill.registration_date ||
+                    "—";
+
+
+                billCount.textContent =
+                    bill.bill_count ??
+                    "—";
+
+
+                confirmedProcedure.textContent =
+                    bill.confirmed_procedure === true
+                        ? "Yes"
+                        : bill.confirmed_procedure === false
+                            ? "No"
+                            : "—";
+
+
+                initiator.textContent =
+                    bill.initiator ||
+                    "—";
+
+
+                author.textContent =
+                    bill.author ||
+                    "—";
+
+
+                packageName.textContent =
+                    bill.package_name ||
+                    "—";
+
+
+                /*
+                 * ოფიციალური პარლამენტის გვერდი
+                 */
+
+                officialLink.href =
+                    `https://info.parliament.ge/#law-drafting/${bill.bill_id}`;
+
+
+                /*
+                 * გვერდის title
+                 */
+
+                document.title =
+                    `${bill.bill_name} | LegisWatch`;
+
+            }
+
+
+            catch (error) {
+
+                console.error(error);
+
+                showError();
+
+            }
+
+        }
+
+
+        /*
+         * Error state
+         */
+
+        function showError() {
+
+            document.querySelector(
+                ".bill-details-header"
+            ).style.display = "none";
+
+            document.querySelector(
+                ".bill-description-section"
+            ).style.display = "none";
+
+            document.querySelector(
+                ".bill-information"
+            ).style.display = "none";
+
+            document.querySelector(
+                ".bill-person-section"
+            ).style.display = "none";
+
+            document.querySelector(
+                ".bill-official-link"
+            ).style.display = "none";
+
+            billError.style.display =
+                "block";
+
+        }
+
+
+        /*
+         * დაწყება
+         */
+
+        loadBill();
+
+    </script>
+
+
+</body>
+
+</html>
