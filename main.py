@@ -7,7 +7,7 @@ from database import (create_table,
                       get_bills as get_database_bills, 
                       get_bill_by_id)
 
-from users import create_users_table
+from users import create_users_table, create_user
 
 # პარლამენტის API-დან მონაცემების ფუნქციის იმპორტი
 from api_client import get_bills
@@ -41,6 +41,42 @@ create_users_table()
 def home():
     return {
         "message": "LegisWatch is running"
+    }
+
+@app.post("/register")
+def register(data: dict):
+    email = data.get("email")
+    password = data.get("password")
+
+    if not email or not password:
+        raise HTTPException(
+            status_code=400,
+            detail="Email and password are required"
+        )
+
+    try:
+        user = create_user(email, password)
+
+    except Exception as error:
+        if "duplicate key" in str(error):
+            raise HTTPException(
+                status_code=400,
+                detail="User with this email already exists"
+            )
+
+        raise HTTPException(
+            status_code=500,
+            detail="Registration failed"
+        )
+
+    return {
+        "message": "User registered successfully",
+        "user": {
+            "id": user[0],
+            "email": user[1],
+            "is_verified": user[2],
+            "created_at": user[3]
+        }
     }
 
 @app.get("/bills")
