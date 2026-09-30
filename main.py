@@ -7,6 +7,8 @@ from database import (create_table,
                       get_bills as get_database_bills, 
                       get_bill_by_id)
 
+from users import create_users_table
+
 # პარლამენტის API-დან მონაცემების ფუნქციის იმპორტი
 from api_client import get_bills
 
@@ -33,6 +35,7 @@ app.add_middleware(
 )
 
 create_table()
+create_users_table()
 # მთავარი გვერდი
 @app.get("/")
 def home():
