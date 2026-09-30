@@ -25,7 +25,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5500",
-         "https://front-end-production-71b9.up.railway.app"
+        "https://front-end-production-e71d.up.railway.app"
     ],
     allow_credentials=True,
     allow_methods=["*"],

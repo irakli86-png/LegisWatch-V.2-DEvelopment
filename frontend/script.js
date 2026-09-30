@@ -61,7 +61,7 @@ const languageEnglish =
 ========================================================= */
 
 const API_URL =
-    "https://legiswatch-production.up.railway.app";
+    "https://legiswatch-v2-development-production.up.railway.app";
 
 const limit = 5;
 
