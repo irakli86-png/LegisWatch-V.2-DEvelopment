@@ -21,6 +21,16 @@ def create_users_table():
         )
     """)
 
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS email_verification_tokens(
+            user_id INTEGER PRIMARY KEY
+                REFERENCES users(id) ON DELETE CASCADE,
+            token_hash TEXT UNIQUE NOT NULL,
+            expires_at TIMESTAMPTZ NOT NULL,
+            created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
+
     conn.commit()
     conn.close()
 
