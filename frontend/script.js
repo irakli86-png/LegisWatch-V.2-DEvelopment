@@ -127,6 +127,7 @@ loginForm.addEventListener("submit", async (event) => {
         loginMessage.style.color = "#4caf50";
 
         loginForm.reset();
+        loginModal.style.display = "none";
 
     } catch (error) {
         loginMessage.textContent = error.message;
