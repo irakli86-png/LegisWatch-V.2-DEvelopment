@@ -64,6 +64,57 @@ const loginButton =
 const signupButton =
     document.getElementById("signupButton");
 
+// USER MENU ELEMENTS
+const authButtons = document.getElementById("authButtons");
+const userMenu = document.getElementById("userMenu");
+const userEmail = document.getElementById("userEmail");
+const logoutButton = document.getElementById("logoutButton");
+
+// CHECK AUTHENTICATION
+async function checkAuthentication() {
+    const token = localStorage.getItem("legiswatchToken");
+
+    if (!token) {
+        authButtons.style.display = "flex";
+        userMenu.style.display = "none";
+        return;
+    }
+
+    try {
+        const response = await fetch(`${API_URL}/me`, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error("Session expired");
+        }
+
+        const user = await response.json();
+
+        authButtons.style.display = "none";
+        userMenu.style.display = "flex";
+        userEmail.textContent = user.email;
+
+    } catch (error) {
+        localStorage.removeItem("legiswatchToken");
+
+        authButtons.style.display = "flex";
+        userMenu.style.display = "none";
+    }
+}
+
+// RUN AUTHENTICATION CHECK ON PAGE LOAD
+checkAuthentication();
+
+// LOGOUT
+logoutButton.addEventListener("click", () => {
+    localStorage.removeItem("legiswatchToken");
+
+    userMenu.style.display = "none";
+    authButtons.style.display = "flex";
+});
 
 // LOGIN MODAL ELEMENTS
 const loginModal = document.getElementById("loginModal");
