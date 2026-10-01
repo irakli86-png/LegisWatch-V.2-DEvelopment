@@ -12,7 +12,8 @@ from users import (
     create_user,
     create_verification_token,
     verify_email_token,
-    authenticate_user
+    authenticate_user,
+    get_user_by_id
 )
 
 from fastapi import Depends
@@ -34,6 +35,7 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 security = HTTPBearer()
 
+
 def get_current_user(
     credentials: HTTPAuthorizationCredentials = Depends(security)
 ):
@@ -54,16 +56,22 @@ def get_current_user(
                 detail="Invalid authentication token"
             )
 
-        return {
-            "id": int(user_id),
-            "email": payload.get("email")
-        }
+        user = get_user_by_id(int(user_id))
+
+        if user is None or not user["is_verified"]:
+            raise HTTPException(
+                status_code=401,
+                detail="User not found or not verified"
+            )
+
+        return user
 
     except (jwt.InvalidTokenError, ValueError, TypeError):
         raise HTTPException(
             status_code=401,
             detail="Invalid or expired token"
         )
+
 
 
 

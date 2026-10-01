@@ -166,3 +166,32 @@ def authenticate_user(email, password):
         "email": user[1],
         "is_verified": user[3]
     }
+
+
+
+
+def get_user_by_id(user_id):
+    conn = psycopg.connect(DATABASE_URL)
+    cursor = conn.cursor()
+
+    try:
+        cursor.execute("""
+            SELECT id, email, is_verified
+            FROM users
+            WHERE id = %s
+        """, (user_id,))
+
+        user = cursor.fetchone()
+
+        if user is None:
+            return None
+
+        return {
+            "id": user[0],
+            "email": user[1],
+            "is_verified": user[2]
+        }
+
+    finally:
+        cursor.close()
+        conn.close()
