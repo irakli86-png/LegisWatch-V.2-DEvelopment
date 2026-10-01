@@ -15,6 +15,9 @@ from users import (
     authenticate_user
 )
 
+from fastapi import Depends
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+
 # პარლამენტის API-დან მონაცემების ფუნქციის იმპორტი
 from api_client import get_bills
 
@@ -27,6 +30,41 @@ from datetime import datetime, timedelta, timezone
 SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
+
+
+security = HTTPBearer()
+
+def get_current_user(
+    credentials: HTTPAuthorizationCredentials = Depends(security)
+):
+    token = credentials.credentials
+
+    try:
+        payload = jwt.decode(
+            token,
+            SECRET_KEY,
+            algorithms=[ALGORITHM]
+        )
+
+        user_id = payload.get("sub")
+
+        if user_id is None:
+            raise HTTPException(
+                status_code=401,
+                detail="Invalid authentication token"
+            )
+
+        return {
+            "id": int(user_id),
+            "email": payload.get("email")
+        }
+
+    except (jwt.InvalidTokenError, ValueError, TypeError):
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid or expired token"
+        )
+
 
 
 # --------------------------------------------------
@@ -216,6 +254,13 @@ def login(data: dict):
         "user": user
     }
 
+
+@app.get("/me")
+def get_me(current_user: dict = Depends(get_current_user)):
+    return {
+        "message": "Authenticated successfully",
+        "user": current_user
+    }
 
 
 @app.get("/bills")
