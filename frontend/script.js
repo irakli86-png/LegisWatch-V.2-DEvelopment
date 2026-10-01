@@ -56,6 +56,85 @@ const languageEnglish =
     document.getElementById("languageEnglish");
 
 
+// AUTHENTICATION BUTTONS
+
+const loginButton =
+    document.getElementById("loginButton");
+
+const signupButton =
+    document.getElementById("signupButton");
+
+
+// LOGIN MODAL ELEMENTS
+const loginModal = document.getElementById("loginModal");
+const closeLoginModal = document.getElementById("closeLoginModal");
+
+// OPEN LOGIN MODAL
+loginButton.addEventListener("click", () => {
+    loginModal.style.display = "flex";
+});
+
+// CLOSE LOGIN MODAL
+closeLoginModal.addEventListener("click", () => {
+    loginModal.style.display = "none";
+});
+
+// CLOSE MODAL WHEN CLICKING OUTSIDE
+loginModal.addEventListener("click", (event) => {
+    if (event.target === loginModal) {
+        loginModal.style.display = "none";
+    }
+});
+
+// LOGIN FORM ELEMENTS
+const loginForm = document.getElementById("loginForm");
+const loginEmail = document.getElementById("loginEmail");
+const loginPassword = document.getElementById("loginPassword");
+const loginMessage = document.getElementById("loginMessage");
+
+
+// LOGIN FORM SUBMISSION
+loginForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const email = loginEmail.value.trim();
+    const password = loginPassword.value;
+
+    loginMessage.textContent = "Logging in...";
+    loginMessage.style.color = "#fff";
+
+    try {
+        const response = await fetch(`${API_URL}/login`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.detail || "Login failed");
+        }
+
+        localStorage.setItem("legiswatchToken", data.access_token);
+
+        loginMessage.textContent = "Login successful!";
+        loginMessage.style.color = "#4caf50";
+
+        loginForm.reset();
+
+    } catch (error) {
+        loginMessage.textContent = error.message;
+        loginMessage.style.color = "#ff5555";
+    }
+});
+
+
 /* =========================================================
    SETTINGS
 ========================================================= */

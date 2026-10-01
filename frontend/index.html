@@ -100,6 +100,16 @@
             <button id="languageEnglish" type="button" class="active">ENG</button>
         </div>
 
+        <div class="auth-buttons">
+            <button type="button" id="loginButton" class="login-button">
+                LOGIN
+            </button>
+
+            <button type="button" id="signupButton" class="signup-button">
+                SIGN UP
+            </button>
+        </div>
+
         <div class="header-social">
 
             <a href="#">
@@ -783,6 +793,46 @@
 
 </footer>
 
+
+<!-- LOGIN MODAL -->
+<div id="loginModal" class="auth-modal">
+    <div class="auth-modal-content">
+        <button
+            type="button"
+            id="closeLoginModal"
+            class="auth-close"
+            aria-label="Close"
+        >
+            &times;
+        </button>
+
+        <h2>LOGIN</h2>
+
+        <form id="loginForm">
+            <label for="loginEmail">Email</label>
+            <input
+                type="email"
+                id="loginEmail"
+                placeholder="Enter your email"
+                required
+            >
+
+            <label for="loginPassword">Password</label>
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="Enter your password"
+                required
+            >
+
+            <button type="submit" class="auth-submit">
+                LOGIN
+            </button>
+        </form>
+
+        <p id="loginMessage" class="auth-message"></p>
+    </div>
+</div>
 
 
 <!-- JAVASCRIPT -->
