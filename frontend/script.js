@@ -91,11 +91,12 @@ async function checkAuthentication() {
             throw new Error("Session expired");
         }
 
-        const user = await response.json();
+        
+        const data = await response.json();
 
         authButtons.style.display = "none";
         userMenu.style.display = "flex";
-        userEmail.textContent = user.email;
+        userEmail.textContent = data.user.email;
 
     } catch (error) {
         localStorage.removeItem("legiswatchToken");
