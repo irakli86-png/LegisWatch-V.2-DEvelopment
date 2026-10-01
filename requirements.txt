@@ -3,3 +3,4 @@ uvicorn
 requests
 psycopg[binary]
 pwdlib[argon2]
+PyJWT

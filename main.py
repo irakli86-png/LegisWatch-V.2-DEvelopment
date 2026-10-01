@@ -11,7 +11,8 @@ from users import (
     create_users_table,
     create_user,
     create_verification_token,
-    verify_email_token
+    verify_email_token,
+    authenticate_user
 )
 
 # პარლამენტის API-დან მონაცემების ფუნქციის იმპორტი
@@ -19,6 +20,13 @@ from api_client import get_bills
 
 # Email ფუნქციის იმპორტი
 from email_sender import send_email
+import os
+import jwt
+from datetime import datetime, timedelta, timezone
+
+SECRET_KEY = os.getenv("SECRET_KEY")
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 
 # --------------------------------------------------
@@ -144,6 +152,71 @@ def verify_email(token: str):
     return {
         "message": "Email verified successfully"
     }
+
+
+
+@app.post("/login")
+def login(data: dict):
+    email = data.get("email")
+    password = data.get("password")
+
+    if not email or not password:
+        raise HTTPException(
+            status_code=400,
+            detail="Email and password are required"
+        )
+
+    if not isinstance(email, str) or not isinstance(password, str):
+        raise HTTPException(
+            status_code=400,
+            detail="Email and password must be strings"
+        )
+
+    user = authenticate_user(email, password)
+
+    if user == "not_verified":
+        raise HTTPException(
+            status_code=403,
+            detail="Please verify your email first"
+        )
+
+    if user is None:
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid email or password"
+        )
+
+    if not SECRET_KEY:
+        raise HTTPException(
+            status_code=500,
+            detail="Authentication is not configured"
+        )
+
+    now = datetime.now(timezone.utc)
+
+    payload = {
+        "sub": str(user["id"]),
+        "email": user["email"],
+        "iat": now,
+        "exp": now + timedelta(
+            minutes=ACCESS_TOKEN_EXPIRE_MINUTES
+        )
+    }
+
+    access_token = jwt.encode(
+        payload,
+        SECRET_KEY,
+        algorithm=ALGORITHM
+    )
+
+    return {
+        "access_token": access_token,
+        "token_type": "bearer",
+        "expires_in": ACCESS_TOKEN_EXPIRE_MINUTES * 60,
+        "user": user
+    }
+
+
 
 @app.get("/bills")
 def bills(limit: int = 10, offset: int = 0, search: str = ""):

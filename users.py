@@ -133,3 +133,36 @@ def verify_email_token(token):
     conn.close()
 
     return True
+
+
+def authenticate_user(email, password):
+    email = email.strip().lower()
+
+    conn = psycopg.connect(DATABASE_URL)
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT id, email, password_hash, is_verified
+        FROM users
+        WHERE email = %s
+    """, (email,))
+
+    user = cursor.fetchone()
+
+    cursor.close()
+    conn.close()
+
+    if user is None:
+        return None
+
+    if not password_hash.verify(password, user[2]):
+        return None
+
+    if not user[3]:
+        return "not_verified"
+
+    return {
+        "id": user[0],
+        "email": user[1],
+        "is_verified": user[3]
+    }
