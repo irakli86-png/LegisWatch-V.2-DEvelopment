@@ -7,7 +7,12 @@ from database import (create_table,
                       get_bills as get_database_bills, 
                       get_bill_by_id)
 
-from users import create_users_table, create_user
+from users import (
+    create_users_table,
+    create_user,
+    create_verification_token,
+    verify_email_token
+)
 
 # პარლამენტის API-დან მონაცემების ფუნქციის იმპორტი
 from api_client import get_bills
@@ -43,6 +48,7 @@ def home():
         "message": "LegisWatch is running"
     }
 
+
 @app.post("/register")
 def register(data: dict):
     email = data.get("email")
@@ -52,6 +58,20 @@ def register(data: dict):
         raise HTTPException(
             status_code=400,
             detail="Email and password are required"
+        )
+
+    if not isinstance(email, str) or not isinstance(password, str):
+        raise HTTPException(
+            status_code=400,
+            detail="Email and password must be strings"
+        )
+
+    email = email.strip().lower()
+
+    if not email or len(password) < 8:
+        raise HTTPException(
+            status_code=400,
+            detail="Invalid email or password must be at least 8 characters"
         )
 
     try:
@@ -69,14 +89,60 @@ def register(data: dict):
             detail="Registration failed"
         )
 
+    token = create_verification_token(user[0])
+
+    verification_link = (
+        "https://legiswatch-v2-development-production.up.railway.app"
+        f"/verify-email?token={token}"
+    )
+
+    email_subject = "Verify your LegisWatch account"
+
+    email_message = (
+        "Welcome to LegisWatch!\n\n"
+        "Please verify your email address by opening this link:\n\n"
+        f"{verification_link}\n\n"
+        "This link expires in 24 hours."
+    )
+
+    try:
+        send_email(
+            email_subject,
+            email_message,
+            email
+        )
+    except Exception:
+        raise HTTPException(
+            status_code=502,
+            detail=(
+                "Account created, but verification email could not "
+                "be sent. Please contact support."
+            )
+        )
+
     return {
-        "message": "User registered successfully",
+        "message": "Registration successful. Please verify your email.",
         "user": {
             "id": user[0],
             "email": user[1],
             "is_verified": user[2],
             "created_at": user[3]
         }
+    }
+
+
+@app.get("/verify-email")
+def verify_email(token: str):
+    is_verified = verify_email_token(token)
+
+    if not is_verified:
+        raise HTTPException(
+            status_code=400,
+            detail="Invalid or expired verification token"
+        )
+
+    return {
+        "message": "Email verified successfully"
     }
 
 @app.get("/bills")

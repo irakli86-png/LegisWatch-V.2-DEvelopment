@@ -1,6 +1,9 @@
 import os
 import psycopg
 from pwdlib import PasswordHash
+import secrets
+import hashlib
+from datetime import datetime, timedelta, timezone
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 
@@ -56,3 +59,77 @@ def create_user(email, password):
     conn.close()
 
     return user
+
+def create_verification_token(user_id):
+    token = secrets.token_urlsafe(32)
+
+    token_hash = hashlib.sha256(
+        token.encode()
+    ).hexdigest()
+
+    expires_at = datetime.now(timezone.utc) + timedelta(hours=24)
+
+    conn = psycopg.connect(DATABASE_URL)
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        INSERT INTO email_verification_tokens (
+            user_id,
+            token_hash,
+            expires_at
+        )
+        VALUES (%s, %s, %s)
+        ON CONFLICT (user_id)
+        DO UPDATE SET
+            token_hash = EXCLUDED.token_hash,
+            expires_at = EXCLUDED.expires_at,
+            created_at = CURRENT_TIMESTAMP
+    """, (
+        user_id,
+        token_hash,
+        expires_at
+    ))
+
+    conn.commit()
+    conn.close()
+
+    return token
+
+def verify_email_token(token):
+    token_hash = hashlib.sha256(
+        token.encode()
+    ).hexdigest()
+
+    conn = psycopg.connect(DATABASE_URL)
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT user_id
+        FROM email_verification_tokens
+        WHERE token_hash = %s
+        AND expires_at > NOW()
+    """, (token_hash,))
+
+    result = cursor.fetchone()
+
+    if result is None:
+        conn.close()
+        return False
+
+    user_id = result[0]
+
+    cursor.execute("""
+        UPDATE users
+        SET is_verified = TRUE
+        WHERE id = %s
+    """, (user_id,))
+
+    cursor.execute("""
+        DELETE FROM email_verification_tokens
+        WHERE user_id = %s
+    """, (user_id,))
+
+    conn.commit()
+    conn.close()
+
+    return True
