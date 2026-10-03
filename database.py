@@ -207,3 +207,66 @@ def get_bill_by_id(bill_id):
     conn.close()
 
     return bill
+
+
+def create_saved_bills_table():
+    conn = psycopg.connect(DATABASE_URL)
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS saved_bills (
+            id SERIAL PRIMARY KEY,
+            user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+            bill_id INTEGER NOT NULL REFERENCES bills(bill_id) ON DELETE CASCADE,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            UNIQUE (user_id, bill_id)
+        )
+    """)
+
+    conn.commit()
+    conn.close()
+
+
+def save_bill_for_user(user_id, bill_id):
+    conn = psycopg.connect(DATABASE_URL)
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        INSERT INTO saved_bills (user_id, bill_id)
+        VALUES (%s, %s)
+        ON CONFLICT (user_id, bill_id) DO NOTHING
+    """, (user_id, bill_id))
+
+    conn.commit()
+    conn.close()
+
+
+def get_saved_bills(user_id):
+    conn = psycopg.connect(DATABASE_URL)
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT bills.*
+        FROM saved_bills
+        JOIN bills ON saved_bills.bill_id = bills.bill_id
+        WHERE saved_bills.user_id = %s
+        ORDER BY saved_bills.created_at DESC
+    """, (user_id,))
+
+    bills = cursor.fetchall()
+    conn.close()
+
+    return bills
+
+
+def remove_saved_bill(user_id, bill_id):
+    conn = psycopg.connect(DATABASE_URL)
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        DELETE FROM saved_bills
+        WHERE user_id = %s AND bill_id = %s
+    """, (user_id, bill_id))
+
+    conn.commit()
+    conn.close()

@@ -1,11 +1,15 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
 
 # მონაცემთა ბაზის ფუნქციების იმპორტი
 from database import (create_table, 
                       insert_bill, 
                       get_bills as get_database_bills, 
-                      get_bill_by_id)
+                      get_bill_by_id,
+                      create_saved_bills_table,
+                      save_bill_for_user,
+                      get_saved_bills,
+                      remove_saved_bill)
 
 from users import (
     create_users_table,
@@ -95,6 +99,9 @@ app.add_middleware(
 
 create_table()
 create_users_table()
+create_saved_bills_table()
+
+
 # მთავარი გვერდი
 @app.get("/")
 def home():
@@ -322,6 +329,48 @@ def check_updates(data: dict):
     return {
         "message": "Updates checked successfully",
         "new_bills": new_bills_count
+    }
+
+@app.post("/saved-bills/{bill_id}")
+def save_bill(
+    bill_id: int,
+    current_user: dict = Depends(get_current_user)
+):
+    bill = get_bill_by_id(bill_id)
+
+    if not bill:
+        raise HTTPException(
+            status_code=404,
+            detail="Bill not found"
+        )
+
+    save_bill_for_user(current_user["id"], bill_id)
+
+    return {
+        "message": "Bill saved successfully",
+        "bill_id": bill_id
+    }
+
+@app.get("/saved-bills")
+def get_user_saved_bills(
+    current_user: dict = Depends(get_current_user)
+):
+    bills = get_saved_bills(current_user["id"])
+
+    return {
+        "saved_bills": bills
+    }
+
+@app.delete("/saved-bills/{bill_id}")
+def delete_saved_bill(
+    bill_id: int,
+    current_user: dict = Depends(get_current_user)
+):
+    remove_saved_bill(current_user["id"], bill_id)
+
+    return {
+        "message": "Bill removed from saved list",
+        "bill_id": bill_id
     }
 
 # --------------------------------------------------
