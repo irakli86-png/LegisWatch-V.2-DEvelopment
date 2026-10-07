@@ -157,7 +157,19 @@
                 </h1>
 
             </div>
+            <div class="bill-save-container">
 
+                <button
+                    id="saveBillButton"
+                    class="bill-save-button"
+                    type="button"
+                >
+                    <span id="saveBillButtonText">
+                        SAVE LEGISLATION
+                    </span>
+                </button>
+
+            </div>
 
             <!-- DESCRIPTION -->
 
@@ -461,7 +473,15 @@
             document.getElementById(
                 "billError"
             );
+        const saveBillButton =
+            document.getElementById(
+                "saveBillButton"
+            );
 
+        const saveBillButtonText =
+            document.getElementById(
+                "saveBillButtonText"
+            );
 
         /*
          * HTML უსაფრთხოებისთვის
@@ -499,7 +519,61 @@
                 );
 
         }
+        async function checkSavedBill() {
 
+            const token =
+                localStorage.getItem("legiswatchToken");
+
+            if (!token || !billId) {
+                return;
+            }
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_URL}/saved-bills`,
+                        {
+                            headers: {
+                                "Authorization":
+                                    `Bearer ${token}`
+                            }
+                        }
+                    );
+
+        if (!response.ok) {
+            return;
+        }
+
+        const data =
+            await response.json();
+
+        const savedBills =
+            data.saved_bills || [];
+
+        const isSaved =
+            savedBills.some(
+                function (bill) {
+                    return bill[1] === Number(billId);
+                }
+            );
+
+        if (isSaved) {
+
+            saveBillButtonText.textContent =
+                "SAVED";
+
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Unable to check saved bill:",
+            error
+        );
+
+    }
+}
 
         /*
          * მონაცემების ჩატვირთვა
@@ -663,6 +737,7 @@
          */
 
         loadBill();
+        checkSavedBill();
 
     </script>
 
