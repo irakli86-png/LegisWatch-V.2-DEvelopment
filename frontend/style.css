@@ -2784,3 +2784,295 @@ html[lang="ka"] .hero h1 span {
     opacity: 0.6;
     cursor: not-allowed;
 }
+
+/* =====================================================
+   SAVED LEGISLATION PAGE
+===================================================== */
+
+.saved-legislation-page {
+    padding: 70px 0 90px;
+}
+
+.saved-legislation-header {
+    margin-bottom: 45px;
+}
+
+.saved-legislation-header .bill-type {
+    margin-bottom: 14px;
+}
+
+.saved-legislation-header h1 {
+    margin: 0 0 14px;
+    font-size: 42px;
+    line-height: 1.1;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.saved-legislation-header p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   SAVED BILLS LIST
+===================================================== */
+
+.saved-bills-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+
+/* =====================================================
+   SAVED BILL CARD
+===================================================== */
+
+.saved-bill-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    gap: 40px;
+
+    padding: 30px 32px;
+
+    border: 1px solid #d9d9d9;
+    background: #fff;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.saved-bill-card:hover {
+    border-color: #999;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+
+/* =====================================================
+   CARD CONTENT
+===================================================== */
+
+.saved-bill-card-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.saved-bill-type {
+    margin-bottom: 10px;
+
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+
+    color: #777;
+}
+
+.saved-bill-card h2 {
+    margin: 0 0 14px;
+
+    font-size: 22px;
+    line-height: 1.45;
+    font-weight: 600;
+
+    color: #111;
+}
+
+.saved-bill-card p {
+    margin: 0;
+
+    font-size: 15px;
+    line-height: 1.7;
+
+    color: #555;
+}
+
+
+/* =====================================================
+   CARD ACTIONS
+===================================================== */
+
+.saved-bill-card-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    flex-shrink: 0;
+
+    padding-top: 4px;
+}
+
+
+/* VIEW BUTTON */
+
+.saved-view-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 42px;
+    padding: 0 20px;
+
+    border: 1px solid #111;
+
+    background: #111;
+    color: #fff;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.saved-view-button:hover {
+    background: transparent;
+    color: #111;
+}
+
+
+/* REMOVE BUTTON */
+
+.saved-remove-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 42px;
+    padding: 0 20px;
+
+    border: 1px solid #111;
+
+    background: transparent;
+    color: #111;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.saved-remove-button:hover {
+    background: #111;
+    color: #fff;
+}
+
+
+/* =====================================================
+   EMPTY STATE
+===================================================== */
+
+.saved-empty-state {
+    padding: 70px 30px;
+
+    border: 1px solid #ddd;
+
+    text-align: center;
+}
+
+.saved-empty-state h2 {
+    margin: 0 0 12px;
+
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.saved-empty-state p {
+    margin: 0 0 25px;
+
+    color: #666;
+    font-size: 15px;
+}
+
+.saved-back-button {
+    display: inline-flex;
+
+    padding: 12px 22px;
+
+    background: #111;
+    color: #fff;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+}
+
+
+/* =====================================================
+   ERROR
+===================================================== */
+
+.saved-error {
+    padding: 50px 30px;
+
+    border: 1px solid #ddd;
+
+    text-align: center;
+}
+
+.saved-error h2 {
+    margin: 0 0 10px;
+
+    font-size: 22px;
+}
+
+.saved-error p {
+    margin: 0;
+
+    color: #666;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+
+    .saved-legislation-page {
+        padding: 45px 0 60px;
+    }
+
+    .saved-legislation-header h1 {
+        font-size: 32px;
+    }
+
+    .saved-bill-card {
+        flex-direction: column;
+        gap: 25px;
+
+        padding: 24px;
+    }
+
+    .saved-bill-card h2 {
+        font-size: 19px;
+    }
+
+    .saved-bill-card-actions {
+        width: 100%;
+    }
+
+    .saved-view-button,
+    .saved-remove-button {
+        flex: 1;
+    }
+
+}
