@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Saved Legislation | LegisWatch</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="site-header">
+
+        <div class="container header-inner">
+
+
+            <!-- LOGO -->
+
+            <a
+                href="index.html#home"
+                class="logo"
+            >
+
+                <img
+                    src="Assets/legiswatch-logo.png"
+                    alt="LegisWatch"
+                    class="logo-mark"
+                >
+
+                <div class="logo-info">
+
+                    <span class="logo-text">
+                        LegisWatch
+                    </span>
+
+                    <span class="logo-tagline">
+                        STAY INFORMED. TRACK WHAT MATTERS.
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <!-- NAVIGATION -->
+
+            <nav class="main-nav">
+
+                <a href="index.html#home">
+                    HOME
+                </a>
+
+                <a
+                    href="index.html#legislation"
+                    class="active"
+                >
+                    LEGISLATION
+                </a>
+
+                <a href="index.html#about">
+                    ABOUT
+                </a>
+
+                <a href="index.html#how-it-works">
+                    HOW IT WORKS
+                </a>
+
+            </nav>
+
+
+            <!-- SOCIAL -->
+
+            <div class="header-social">
+
+                <a
+                    href="#"
+                    aria-label="Facebook"
+                >
+                    f
+                </a>
+
+                <a
+                    href="#"
+                    aria-label="Instagram"
+                >
+                    ◎
+                </a>
+
+                <a
+                    href="#"
+                    aria-label="LinkedIn"
+                >
+                    in
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         SAVED LEGISLATION
+    ====================================================== -->
+
+    <main class="saved-legislation-page">
+
+        <div class="container">
+
+
+            <!-- PAGE HEADER -->
+
+            <div class="saved-legislation-header">
+
+                <div class="gold-line"></div>
+
+                <div class="bill-type">
+                    PERSONAL COLLECTION
+                </div>
+
+                <h1>
+                    SAVED LEGISLATION
+                </h1>
+
+                <p>
+                    Legislation you have saved for later review.
+                </p>
+
+            </div>
+
+
+            <!-- SAVED BILLS -->
+
+            <section class="saved-legislation-section">
+
+                <div
+                    id="savedBills"
+                    class="saved-bills-list"
+                >
+                </div>
+
+
+                <!-- EMPTY STATE -->
+
+                <div
+                    id="savedEmptyState"
+                    class="saved-empty-state"
+                    style="display: none;"
+                >
+
+                    <h2>
+                        NO SAVED LEGISLATION
+                    </h2>
+
+                    <p>
+                        You have not saved any legislation yet.
+                    </p>
+
+                    <a
+                        href="index.html#legislation"
+                        class="saved-back-button"
+                    >
+                        BROWSE LEGISLATION
+                    </a>
+
+                </div>
+
+
+                <!-- ERROR -->
+
+                <div
+                    id="savedError"
+                    class="saved-error"
+                    style="display: none;"
+                >
+
+                    <h2>
+                        UNABLE TO LOAD SAVED LEGISLATION
+                    </h2>
+
+                    <p>
+                        Please try again later.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+        </div>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <p>
+                © 2026 LegisWatch. All rights reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         SAVED LEGISLATION JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+        const API_URL =
+            "https://legiswatch-v2-development-production.up.railway.app";
+
+
+        const savedBills =
+            document.getElementById(
+                "savedBills"
+            );
+
+        const savedEmptyState =
+            document.getElementById(
+                "savedEmptyState"
+            );
+
+        const savedError =
+            document.getElementById(
+                "savedError"
+            );
+
+        async function loadSavedBills() {
+
+        const token =
+            localStorage.getItem(
+                "legiswatchToken"
+            );
+
+
+        if (!token) {
+
+            savedEmptyState.style.display =
+                "block";
+
+            return;
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API_URL}/saved-bills`,
+                    {
+                        headers: {
+                            "Authorization":
+                                `Bearer ${token}`
+                        }
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Unable to load saved legislation"
+                );
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            const bills =
+                data.saved_bills || [];
+
+
+            if (bills.length === 0) {
+
+                savedEmptyState.style.display =
+                    "block";
+
+                return;
+            }
+
+
+            savedBills.innerHTML = "";
+
+
+            bills.forEach(
+                function (bill) {
+
+                    const billId =
+                        bill[1];
+
+                    const billType =
+                        bill[2] || "LEGISLATION";
+
+                    const billName =
+                        bill[3] ||
+                        "Untitled legislation";
+
+                    const billDescription =
+                        bill[4] ||
+                        "Description not available.";
+
+
+                    const billCard =
+                        document.createElement(
+                            "article"
+                        );
+
+                    billCard.className =
+                        "saved-bill-card";
+
+
+                    billCard.innerHTML = `
+
+                        <div class="saved-bill-card-content">
+
+                            <div class="saved-bill-type">
+                                ${billType}
+                            </div>
+
+                            <h2>
+                                ${billName}
+                            </h2>
+
+                            <p>
+                                ${billDescription}
+                            </p>
+
+                        </div>
+
+
+                        <div class="saved-bill-card-actions">
+
+                            <a
+                                href="bill.html?id=${billId}"
+                                class="saved-view-button"
+                            >
+                                VIEW LEGISLATION
+                            </a>
+
+
+                            <button
+                                type="button"
+                                class="saved-remove-button"
+                                data-bill-id="${billId}"
+                            >
+                                REMOVE
+                            </button>
+
+                        </div>
+
+                    `;
+
+
+                    savedBills.appendChild(
+                        billCard
+                    );
+
+                }
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Saved legislation error:",
+                error
+            );
+
+            savedError.style.display =
+                "block";
+
+        }
+
+    }
+
+
+    loadSavedBills();
+    </script>
+
+
+</body>
+
+</html>
