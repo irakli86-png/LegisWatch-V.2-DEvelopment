@@ -323,16 +323,17 @@
                     const billId =
                         bill[1];
 
-                    const billType =
-                        bill[2] || "LEGISLATION";
+                    const billDescription =
+                        bill[2] ||
+                        "Description not available.";
 
                     const billName =
                         bill[3] ||
                         "Untitled legislation";
 
-                    const billDescription =
+                    const billType =
                         bill[4] ||
-                        "Description not available.";
+                        "LEGISLATION";
 
 
                     const billCard =
