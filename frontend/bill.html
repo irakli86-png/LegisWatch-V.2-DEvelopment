@@ -575,6 +575,89 @@
     }
 }
 
+
+        async function toggleSavedBill() {
+
+    const token =
+        localStorage.getItem("legiswatchToken");
+
+    if (!token || !billId) {
+        return;
+    }
+
+    const isSaved =
+        saveBillButtonText.textContent === "SAVED";
+
+    try {
+
+        saveBillButton.disabled = true;
+
+        if (!isSaved) {
+
+            const response =
+                await fetch(
+                    `${API_URL}/saved-bills/${billId}`,
+                    {
+                        method: "POST",
+                        headers: {
+                            "Authorization":
+                                `Bearer ${token}`
+                        }
+                    }
+                );
+
+            if (!response.ok) {
+                throw new Error(
+                    "Unable to save legislation"
+                );
+            }
+
+            saveBillButtonText.textContent =
+                "SAVED";
+
+        } else {
+
+            const response =
+                await fetch(
+                    `${API_URL}/saved-bills/${billId}`,
+                    {
+                        method: "DELETE",
+                        headers: {
+                            "Authorization":
+                                `Bearer ${token}`
+                        }
+                    }
+                );
+
+            if (!response.ok) {
+                throw new Error(
+                    "Unable to remove legislation"
+                );
+            }
+
+            saveBillButtonText.textContent =
+                "SAVE LEGISLATION";
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Saved legislation error:",
+            error
+        );
+
+    } finally {
+
+        saveBillButton.disabled = false;
+
+    }
+}
+
+
+        saveBillButton.addEventListener(
+            "click",
+            toggleSavedBill
+        );
         /*
          * მონაცემების ჩატვირთვა
          */
