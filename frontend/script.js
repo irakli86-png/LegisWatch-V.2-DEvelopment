@@ -3,6 +3,8 @@
    FRONTEND JAVASCRIPT
 ========================================================= */
 
+const API_URL =
+    "https://legiswatch-v2-development-production.up.railway.app";
 
 /* =========================================================
    ELEMENTS
@@ -195,8 +197,7 @@ loginForm.addEventListener("submit", async (event) => {
    SETTINGS
 ========================================================= */
 
-const API_URL =
-    "https://legiswatch-v2-development-production.up.railway.app";
+
 
 const limit = 5;
 
