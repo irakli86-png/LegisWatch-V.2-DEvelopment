@@ -3320,3 +3320,99 @@ html[lang="ka"] .hero h1 span {
         text-align: center;
     }
 }
+
+/* =========================================================
+   LEGISWATCH HEADER — FINAL LAYOUT OVERRIDE
+   Keep language, account actions and social icons aligned
+========================================================= */
+
+@media (min-width: 1101px) {
+    .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 0;
+    }
+
+    .logo {
+        flex: 0 0 auto;
+    }
+
+    .main-nav {
+        flex: 0 1 auto;
+        margin-left: auto;
+        margin-right: 24px;
+        gap: 30px;
+    }
+
+    .language-switcher {
+        flex: 0 0 auto;
+        margin: 0 18px 0 0;
+    }
+
+    .auth-buttons,
+    .user-menu {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex: 0 0 auto;
+        gap: 10px;
+        margin: 0 18px 0 0;
+        white-space: nowrap;
+    }
+
+    .user-menu #userEmail {
+        display: none;
+    }
+
+    .user-menu .login-button,
+    .auth-buttons .login-button,
+    .auth-buttons .signup-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 40px;
+        padding: 8px 12px;
+        white-space: nowrap;
+        text-decoration: none;
+        box-sizing: border-box;
+    }
+
+    .header-social {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        flex: 0 0 auto;
+        gap: 18px;
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 1101px) and (max-width: 1450px) {
+    .main-nav {
+        gap: 22px;
+        margin-right: 18px;
+    }
+
+    .language-switcher {
+        margin-right: 12px;
+    }
+
+    .auth-buttons,
+    .user-menu {
+        gap: 8px;
+        margin-right: 12px;
+    }
+
+    .user-menu .login-button,
+    .auth-buttons .login-button,
+    .auth-buttons .signup-button {
+        padding-right: 9px;
+        padding-left: 9px;
+        font-size: 11px;
+    }
+
+    .header-social {
+        gap: 14px;
+    }
+}
