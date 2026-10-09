@@ -100,7 +100,7 @@ async function checkAuthentication() {
         userEmail.textContent = data.user.email;
 
     } catch (error) {
-        localStorage.removeItem("legiswatchToken");
+        console.error("Authentication check error:", error);
 
         authButtons.style.display = "flex";
         userMenu.style.display = "none";
