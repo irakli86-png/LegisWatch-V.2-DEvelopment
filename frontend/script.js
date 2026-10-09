@@ -88,6 +88,7 @@ async function checkAuthentication() {
         });
 
         if (!response.ok) {
+            console.error("Authentication failed:", response.status);
             throw new Error("Session expired");
         }
 
