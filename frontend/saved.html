@@ -23,101 +23,99 @@
 <body>
 
 
-    <!-- =====================================================
-         HEADER
-    ====================================================== -->
+<!-- =====================================================
+     HEADER
+====================================================== -->
 
-    <header class="site-header">
+<header class="site-header">
+    <div class="container header-inner">
 
-        <div class="container header-inner">
-
-
-            <!-- LOGO -->
-
-            <a
-                href="index.html#home"
-                class="logo"
+        <!-- LOGO -->
+        <a href="index.html#home" class="logo">
+            <img
+                src="Assets/legiswatch-logo.png"
+                alt="LegisWatch"
+                class="logo-mark"
             >
 
-                <img
-                    src="Assets/legiswatch-logo.png"
-                    alt="LegisWatch"
-                    class="logo-mark"
-                >
+            <div class="logo-info">
+                <span class="logo-text">LegisWatch</span>
+                <span class="logo-tagline">
+                    STAY INFORMED. TRACK WHAT MATTERS.
+                </span>
+            </div>
+        </a>
 
-                <div class="logo-info">
+        <!-- NAVIGATION -->
+        <nav class="main-nav">
+            <a href="index.html#home">HOME</a>
 
-                    <span class="logo-text">
-                        LegisWatch
-                    </span>
-
-                    <span class="logo-tagline">
-                        STAY INFORMED. TRACK WHAT MATTERS.
-                    </span>
-
-                </div>
-
+            <a href="index.html#legislation" class="active">
+                LEGISLATION
             </a>
 
+            <a href="index.html#about">ABOUT</a>
 
-            <!-- NAVIGATION -->
+            <a href="index.html#how-it-works">
+                HOW IT WORKS
+            </a>
+        </nav>
 
-            <nav class="main-nav">
-
-                <a href="index.html#home">
-                    HOME
-                </a>
-
-                <a
-                    href="index.html#legislation"
-                    class="active"
-                >
-                    LEGISLATION
-                </a>
-
-                <a href="index.html#about">
-                    ABOUT
-                </a>
-
-                <a href="index.html#how-it-works">
-                    HOW IT WORKS
-                </a>
-
-            </nav>
-
-
-            <!-- SOCIAL -->
-
-            <div class="header-social">
-
-                <a
-                    href="#"
-                    aria-label="Facebook"
-                >
-                    f
-                </a>
-
-                <a
-                    href="#"
-                    aria-label="Instagram"
-                >
-                    ◎
-                </a>
-
-                <a
-                    href="#"
-                    aria-label="LinkedIn"
-                >
-                    in
-                </a>
-
-            </div>
-
-
+        <!-- LANGUAGE SWITCHER -->
+        <div class="language-switcher" aria-label="Language selector">
+            <button id="languageGeorgian" type="button">ქარ</button>
+            <span>/</span>
+            <button id="languageEnglish" type="button" class="active">
+                ENG
+            </button>
         </div>
 
-    </header>
+        <!-- AUTHENTICATION -->
+        <div class="auth-buttons" id="authButtons">
+            <button
+                type="button"
+                id="loginButton"
+                class="login-button"
+            >
+                LOGIN
+            </button>
 
+            <button
+                type="button"
+                id="signupButton"
+                class="signup-button"
+            >
+                SIGN UP
+            </button>
+        </div>
+
+        <!-- LOGGED-IN USER -->
+        <div class="user-menu" id="userMenu" style="display: none;">
+            <a href="account.html" class="login-button">
+                MY ACCOUNT
+            </a>
+
+            <span id="userEmail"></span>
+
+            <button
+                type="button"
+                id="logoutButton"
+                class="login-button"
+            >
+                LOGOUT
+            </button>
+        </div>
+
+        <!-- SOCIAL -->
+        <div class="header-social">
+            <a href="#" aria-label="Facebook">f</a>
+            <a href="#" aria-label="X">X</a>
+            <a href="#" aria-label="Instagram">◎</a>
+            <a href="#" aria-label="LinkedIn">in</a>
+        </div>
+
+    </div>
+</header>
 
 
     <!-- =====================================================
