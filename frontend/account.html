@@ -1,0 +1,308 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Account | LegisWatch</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="account-nav">
+        <a href="index.html" class="account-logo">
+            LEGISWATCH
+        </a>
+
+        <nav class="account-navigation">
+            <a href="index.html">HOME</a>
+            <a href="index.html#legislation">LEGISLATION</a>
+            <a href="saved.html">SAVED LEGISLATION</a>
+            <button type="button" id="logoutButton">
+                LOGOUT
+            </button>
+        </nav>
+    </header>
+
+    <main class="account-page">
+
+        <section class="account-header">
+            <p class="account-label">YOUR PERSONAL SPACE</p>
+
+            <h1>MY ACCOUNT</h1>
+
+            <p>
+                Manage your profile and saved legislation
+                in one place.
+            </p>
+        </section>
+
+        <section class="account-card">
+            <div class="account-section-heading">
+                <div>
+                    <p class="account-label">PROFILE</p>
+                    <h2>My Information</h2>
+                </div>
+            </div>
+
+            <div class="account-info">
+                <span>Email address</span>
+                <p id="accountEmail">Loading...</p>
+            </div>
+
+            <div class="account-info">
+                <span>Account status</span>
+                <p id="accountStatus">Loading...</p>
+            </div>
+
+            <div class="account-info">
+                <span>Member since</span>
+                <p id="accountCreatedAt">Loading...</p>
+            </div>
+        </section>
+
+        <section class="account-card">
+            <div class="account-section-heading">
+                <div>
+                    <p class="account-label">YOUR COLLECTION</p>
+                    <h2>Saved Legislation</h2>
+                </div>
+
+                <span
+                    id="savedBillsCount"
+                    class="account-count"
+                >—</span>
+            </div>
+
+            <p class="account-description">
+                Keep your important legislative initiatives
+                organized and access them whenever you need.
+            </p>
+
+            <p
+                id="savedBillsMessage"
+                class="account-secondary-message"
+            >Loading saved legislation...</p>
+
+            <a
+                href="saved.html"
+                class="saved-view-button"
+            >
+                VIEW SAVED LEGISLATION →
+            </a>
+        </section>
+
+        <p
+            id="accountError"
+            class="saved-error"
+            role="alert"
+            style="display: none;"
+        ></p>
+
+        <div class="account-footer">
+            <a href="index.html">← BACK TO HOME</a>
+        </div>
+
+    </main>
+
+    <script>
+        const API_URL =
+            "https://legiswatch-v2-development-production.up.railway.app";
+
+        const accountEmail =
+            document.getElementById("accountEmail");
+
+        const accountStatus =
+            document.getElementById("accountStatus");
+
+        const accountCreatedAt =
+            document.getElementById("accountCreatedAt");
+
+        const savedBillsCount =
+            document.getElementById("savedBillsCount");
+
+        const savedBillsMessage =
+            document.getElementById("savedBillsMessage");
+
+        const accountError =
+            document.getElementById("accountError");
+
+        const logoutButton =
+            document.getElementById("logoutButton");
+
+        function showAccountError(message) {
+            accountError.textContent = message;
+            accountError.style.display = "block";
+        }
+
+        function formatDate(value) {
+            if (!value) {
+                return "Not available";
+            }
+
+            const date = new Date(value);
+
+            if (Number.isNaN(date.getTime())) {
+                return "Not available";
+            }
+
+            return date.toLocaleDateString(
+                document.documentElement.lang || "en",
+                {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric"
+                }
+            );
+        }
+
+        async function loadAccount() {
+            const token =
+                localStorage.getItem("legiswatchToken");
+
+            if (!token) {
+                showAccountError(
+                    "Please log in to access your account."
+                );
+
+                accountEmail.textContent = "Not available";
+                accountStatus.textContent = "Not available";
+                accountCreatedAt.textContent = "Not available";
+                savedBillsCount.textContent = "—";
+                savedBillsMessage.textContent =
+                    "Log in to view your saved legislation.";
+
+                return;
+            }
+
+            try {
+                const response = await fetch(
+                    `${API_URL}/me`,
+                    {
+                        headers: {
+                            "Authorization": `Bearer ${token}`
+                        }
+                    }
+                );
+
+                if (response.status === 401) {
+                    localStorage.removeItem("legiswatchToken");
+
+                    showAccountError(
+                        "Your session has expired. Please log in again."
+                    );
+
+                    accountEmail.textContent = "Not available";
+                    accountStatus.textContent = "Not available";
+                    accountCreatedAt.textContent = "Not available";
+                    savedBillsCount.textContent = "—";
+                    savedBillsMessage.textContent =
+                        "Log in to view your saved legislation.";
+
+                    return;
+                }
+
+                if (!response.ok) {
+                    throw new Error(
+                        "Unable to load account information."
+                    );
+                }
+
+                const data = await response.json();
+                const user = data.user;
+
+                accountEmail.textContent =
+                    user.email || "Not available";
+
+                accountStatus.textContent =
+                    user.is_verified === true
+                        ? "Verified"
+                        : "Not verified";
+
+                accountCreatedAt.textContent =
+                    formatDate(user.created_at);
+
+                await loadSavedBills(token);
+
+            } catch (error) {
+                console.error("Account loading error:", error);
+
+                showAccountError(
+                    "Unable to load your account information. Please try again."
+                );
+            }
+        }
+
+        async function loadSavedBills(token) {
+            try {
+                const response = await fetch(
+                    `${API_URL}/saved-bills`,
+                    {
+                        headers: {
+                            "Authorization": `Bearer ${token}`
+                        }
+                    }
+                );
+
+                if (response.status === 401) {
+                    localStorage.removeItem("legiswatchToken");
+
+                    showAccountError(
+                        "Your session has expired. Please log in again."
+                    );
+
+                    savedBillsCount.textContent = "—";
+                    savedBillsMessage.textContent =
+                        "Please log in to view saved legislation.";
+
+                    return;
+                }
+
+                if (!response.ok) {
+                    throw new Error(
+                        "Unable to load saved legislation."
+                    );
+                }
+
+                const data = await response.json();
+
+                const bills = Array.isArray(data.saved_bills)
+                    ? data.saved_bills
+                    : [];
+
+                savedBillsCount.textContent = bills.length;
+
+                savedBillsMessage.textContent =
+                    bills.length === 0
+                        ? "You have not saved any legislation yet."
+                        : `You have ${bills.length} saved ${
+                            bills.length === 1
+                                ? "legislative initiative"
+                                : "legislative initiatives"
+                        }.`;
+
+            } catch (error) {
+                console.error(
+                    "Saved legislation loading error:",
+                    error
+                );
+
+                savedBillsCount.textContent = "—";
+                savedBillsMessage.textContent =
+                    "Saved legislation could not be loaded.";
+            }
+        }
+
+        logoutButton.addEventListener("click", function () {
+            localStorage.removeItem("legiswatchToken");
+            window.location.href = "index.html";
+        });
+
+        loadAccount();
+    </script>
+
+</body>
+</html>
