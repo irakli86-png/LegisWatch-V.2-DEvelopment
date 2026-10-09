@@ -256,6 +256,59 @@
             document.getElementById(
                 "savedError"
             );
+        
+async function removeSavedBill(billId, billCard) {
+
+    const token =
+        localStorage.getItem(
+            "legiswatchToken"
+        );
+
+    if (!token) {
+        return;
+    }
+
+    try {
+
+        const response =
+            await fetch(
+                `${API_URL}/saved-bills/${billId}`,
+                {
+                    method: "DELETE",
+                    headers: {
+                        "Authorization":
+                            `Bearer ${token}`
+                    }
+                }
+            );
+
+        if (!response.ok) {
+            throw new Error(
+                "Unable to remove legislation"
+            );
+        }
+
+        billCard.remove();
+
+        if (savedBills.children.length === 0) {
+            savedEmptyState.style.display = "block";
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Remove saved legislation error:",
+            error
+        );
+
+        alert(
+            "Unable to remove legislation. Please try again."
+        );
+
+    }
+}
+
+
 
         async function loadSavedBills() {
 
@@ -390,11 +443,29 @@
                     savedBills.appendChild(
                         billCard
                     );
+                    
+                    const removeButton =
+                        billCard.querySelector(
+                            ".saved-remove-button"
+                        );
 
-                }
-            );
 
+                    removeButton.addEventListener(
+                        "click",
+                        function () {
 
+                            removeSavedBill(
+                                billId,
+                                billCard
+                            );
+
+                        }
+                    );
+
+            }   
+        );
+
+                    
         } catch (error) {
 
             console.error(
