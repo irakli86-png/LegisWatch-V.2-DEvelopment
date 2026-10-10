@@ -2,14 +2,50 @@
 
 
 /* =========================================================
-   LEGISWATCH
-   NAMARI STYLE
+   LEGISWATCH — style.css
+
+   რუკა:
+   1. Variables / Reset / Base / Container
+   2. Header (logo, nav, language, auth, social)
+   3. Hero
+   4. Features
+   5. About
+   6. How it works
+   7. Recent legislation (search, results, pagination)
+   8. Test notice / Footer
+   9. Bill details (bill.html)
+   10. Save legislation button
+   11. Saved legislation (saved.html)
+   12. My account (account.html)
+   13. Auth modal
+   14. Georgian overrides  html[lang="ka"]
+   15. Responsive  (ყველა @media აქ, დიდიდან პატარისკენ)
+
+   წესი: თითო სელექტორი = ერთი საბოლოო წესი.
+   ახალი "FINAL FIX" ბლოკი ბოლოში არ დაამატო —
+   იპოვე არსებული წესი და იქ შეცვალე.
 ========================================================= */
 
 
 /* =========================================================
-   RESET
+   1. VARIABLES / RESET / BASE
 ========================================================= */
+
+:root {
+    --black: #111111;
+    --dark-gray: #333333;
+    --gray: #666666;
+    --muted: #777777;
+    --light-gray: #999999;
+    --border: #e5e5e5;
+    --soft-bg: #f8f8f8;
+    --gold: #c8a94b;
+    --red: #bf0603;
+    --white: #ffffff;
+
+    --container: 1280px;
+    --header-height: 108px;
+}
 
 * {
     margin: 0;
@@ -19,7 +55,7 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 108px;
+    scroll-padding-top: var(--header-height);
 }
 
 body {
@@ -30,7 +66,7 @@ body {
         sans-serif;
 
     background: #ffffff;
-    color: #111111;
+    color: var(--black);
     line-height: 1.6;
 }
 
@@ -44,103 +80,56 @@ input {
     font-family: inherit;
 }
 
-
-/* =========================================================
-   VARIABLES
-========================================================= */
-
-:root {
-    --black: #111111;
-    --dark-gray: #333333;
-    --gray: #666666;
-    --light-gray: #999999;
-    --border: #e5e5e5;
-    --gold: #c8a94b;
-    --white: #ffffff;
-    --container: 1280px;
-}
-
-
-/* =========================================================
-   CONTAINER
-========================================================= */
-
 .container {
-    width: min(
-        var(--container),
-        calc(100% - 80px)
-    );
-
+    width: min(var(--container), calc(100% - 80px));
     margin: 0 auto;
 }
 
 
 /* =========================================================
-   HEADER
+   2. HEADER
 ========================================================= */
 
 .site-header {
-    height: 108px;
-
-    background: #111111;
-
-    position: sticky;
-
-    top: 0;
-
-    z-index: 1000;
-
+    height: var(--header-height);
+    background: var(--black);
+    position: relative;
+    z-index: 100;
     border-top: 1px solid #252525;
     border-bottom: 1px solid #252525;
 }
 
 .header-inner {
     height: 100%;
-
     display: flex;
-
     align-items: center;
-
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
 
-/* =========================================================
-   LOGO
-========================================================= */
+/* ---------- Logo ---------- */
 
 .logo {
     display: flex;
-
     align-items: center;
-
     gap: 14px;
-
     height: 100%;
-
     flex-shrink: 0;
 }
 
 .logo-mark {
     width: 74px;
     height: 42px;
-
     display: block;
-
     object-fit: contain;
-
     flex-shrink: 0;
 }
 
 .logo-info {
     display: flex;
-
     flex-direction: column;
-
     justify-content: center;
-
     align-items: flex-start;
-
     gap: 4px;
 }
 
@@ -151,20 +140,16 @@ input {
         sans-serif;
 
     font-size: 30px;
-
     line-height: 1;
-
     font-weight: 700;
-
     letter-spacing: -1.4px;
-
     color: #ffffff;
-
     white-space: nowrap;
 }
 
 .logo-tagline {
     display: block;
+    margin-top: 5px;
 
     font-family:
         "Open Sans",
@@ -172,65 +157,43 @@ input {
         sans-serif;
 
     font-size: 8px;
-
     line-height: 1;
-
     font-weight: 600;
-
     letter-spacing: 2px;
-
     color: #c5c5c5;
-
     white-space: nowrap;
 }
 
 
-/* =========================================================
-   NAVIGATION
-========================================================= */
+/* ---------- Main navigation ---------- */
 
 .main-nav {
     display: flex;
-
     align-items: center;
-
-    gap: 42px;
-
+    gap: 30px;
     margin-left: auto;
-    margin-right: auto;
+    margin-right: 24px;
 }
 
 .main-nav a {
     position: relative;
-
     font-size: 14px;
-
     font-weight: 400;
-
     letter-spacing: 0.5px;
-
     color: #ffffff;
-
     padding: 35px 0;
-
     opacity: 0.92;
+    white-space: nowrap;
 }
 
 .main-nav a::after {
     content: "";
-
     position: absolute;
-
     left: 0;
-
     bottom: 25px;
-
     width: 0;
-
     height: 2px;
-
     background: var(--gold);
-
     transition: width 0.25s ease;
 }
 
@@ -240,2203 +203,20 @@ input {
 }
 
 
-/* =========================================================
-   SOCIAL
-========================================================= */
-
-.header-social {
-    display: flex;
-
-    align-items: center;
-
-    gap: 22px;
-
-    flex-shrink: 0;
-}
-
-.header-social a {
-    font-size: 16px;
-
-    font-weight: 700;
-
-    color: #ffffff;
-
-    transition: opacity 0.2s ease;
-}
-
-.header-social a:hover {
-    opacity: 0.5;
-}
-
-
-/* =========================================================
-   HERO
-========================================================= */
-
-.hero {
-    min-height: 650px;
-
-    display: flex;
-
-    align-items: flex-start;
-
-    padding-top: 32px;
-
-    scroll-margin-top: 108px;
-}
-
-.hero-inner {
-    display: grid;
-
-    grid-template-columns:
-        45%
-        55%;
-
-    align-items: start;
-
-    min-height: 650px;
-}
-
-.hero-content {
-    padding-right: 20px;
-
-    position: relative;
-
-    z-index: 2;
-}
-
-.hero .gold-line {
-    display: none;
-}
-
-.hero h1 {
-    font-size: clamp(
-        52px,
-        4.7vw,
-        68px
-    );
-
-    line-height: 0.98;
-
-    font-weight: 800;
-
-    letter-spacing: -2.8px;
-
-    color: #111111;
-
-    margin-bottom: 38px;
-
-    max-width: 650px;
-}
-
-.hero-description {
-    max-width: 570px;
-
-    font-size: 19px;
-
-    line-height: 1.7;
-
-    font-weight: 300;
-
-    color: #666666;
-
-    margin-bottom: 35px;
-}
-
-
-/* =========================================================
-   UPDATE FORM
-========================================================= */
-
-.update-form {
-    display: flex;
-
-    align-items: stretch;
-
-    width: 100%;
-
-    max-width: 620px;
-}
-
-.update-form input {
-    flex: 1;
-
-    min-width: 0;
-
-    height: 56px;
-
-    padding: 0 20px;
-
-    border: 1px solid #111111;
-
-    border-right: none;
-
-    outline: none;
-
-    background: #ffffff;
-
-    color: #222222;
-
-    font-size: 14px;
-
-    font-weight: 300;
-}
-
-.update-form input::placeholder {
-    color: #999999;
-}
-
-.update-form input:focus {
-    border-color: var(--gold);
-}
-
-
-/* =========================================================
-   HERO BUTTON
-========================================================= */
-
-.outline-button {
-    min-width: 250px;
-
-    height: 56px;
-
-    padding: 0 24px;
-
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 30px;
-
-    border: 1px solid #111111;
-
-    background: #111111;
-
-    color: #ffffff;
-
-    cursor: pointer;
-
-    font-size: 13px;
-
-    font-weight: 600;
-
-    letter-spacing: 1px;
-
-    transition:
-        background 0.25s ease,
-        color 0.25s ease;
-}
-
-.outline-button:hover {
-    background: #ffffff;
-
-    color: #111111;
-}
-
-.outline-button:disabled {
-    opacity: 0.55;
-
-    cursor: wait;
-}
-
-.button-arrow {
-    font-size: 22px;
-
-    line-height: 1;
-}
-
-
-/* =========================================================
-   HERO STATUS
-========================================================= */
-
-.status {
-    min-height: 22px;
-
-    margin-top: 18px;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
-
-    color: #777777;
-
-    font-size: 13px;
-}
-
-
-/* =========================================================
-   HERO VISUAL
-========================================================= */
-
-.hero-visual {
-    height: 620px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: flex-end;
-
-    position: relative;
-
-    padding-left: 20px;
-
-    padding-right: 5px;
-}
-
-.law-sketch {
-    width: 100%;
-
-    max-width: 760px;
-
-    height: auto;
-
-    object-fit: contain;
-
-    filter:
-        grayscale(100%)
-        contrast(105%);
-
-    mix-blend-mode: multiply;
-
-    opacity: 0.92;
-
-    -webkit-mask-image: linear-gradient(
-        to right,
-        transparent 0%,
-        black 12%,
-        black 88%,
-        transparent 100%
-    );
-
-    mask-image: linear-gradient(
-        to right,
-        transparent 0%,
-        black 12%,
-        black 88%,
-        transparent 100%
-    );
-
-    transform: translate(
-        25px,
-        -90px
-    );
-}
-
-
-/* =========================================================
-   FEATURES
-========================================================= */
-
-.features {
-    border-top: 1px solid var(--border);
-
-    border-bottom: 1px solid var(--border);
-
-    padding: 55px 0;
-}
-
-.features-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-}
-
-.feature {
-    display: flex;
-
-    align-items: flex-start;
-
-    gap: 28px;
-
-    min-height: 95px;
-
-    padding: 5px 45px;
-
-    border-right: 1px solid var(--border);
-}
-
-.feature:first-child {
-    padding-left: 10px;
-}
-
-.feature:last-child {
-    border-right: none;
-}
-
-.feature-icon {
-    width: 48px;
-
-    min-width: 48px;
-
-    height: 48px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-}
-
-.feature-icon svg {
-    width: 42px;
-
-    height: 42px;
-
-    fill: none;
-
-    stroke: #111111;
-
-    stroke-width: 1.8;
-
-    stroke-linecap: round;
-
-    stroke-linejoin: round;
-}
-
-.feature h3 {
-    font-size: 13px;
-
-    line-height: 1.4;
-
-    letter-spacing: 2.5px;
-
-    font-weight: 700;
-
-    color: #111111;
-
-    margin-bottom: 9px;
-}
-
-.feature p {
-    max-width: 290px;
-
-    font-size: 15px;
-
-    line-height: 1.7;
-
-    font-weight: 300;
-
-    color: #666666;
-}
-
-
-/* =========================================================
-   ABOUT
-========================================================= */
-
-.about-section {
-    padding: 145px 0 155px;
-
-    background: #ffffff;
-}
-
-.about-inner {
-    display: grid;
-
-    grid-template-columns:
-        40%
-        60%;
-
-    gap: 90px;
-
-    align-items: start;
-}
-
-.section-heading {
-    padding-top: 5px;
-}
-
-.section-heading .gold-line {
-    margin-bottom: 28px;
-}
-
-.about-label {
-    display: block;
-
-    font-size: 12px;
-
-    font-weight: 600;
-
-    letter-spacing: 3px;
-
-    color: #777777;
-
-    margin-bottom: 24px;
-}
-
-.section-heading h2 {
-    font-size: 52px;
-
-    line-height: 1.02;
-
-    letter-spacing: -2.5px;
-
-    font-weight: 800;
-
-    color: #111111;
-}
-
-.about-text {
-    max-width: 650px;
-
-    padding-top: 8px;
-}
-
-.about-lead {
-    font-size: 26px !important;
-
-    line-height: 1.45 !important;
-
-    font-weight: 300 !important;
-
-    color: #333333 !important;
-
-    margin-bottom: 32px !important;
-}
-
-.about-text p {
-    font-size: 17px;
-
-    line-height: 1.85;
-
-    color: #666666;
-
-    font-weight: 300;
-
-    margin-bottom: 26px;
-}
-
-.about-text p:last-child {
-    margin-bottom: 0;
-}
-
-
-/* =========================================================
-   HOW IT WORKS
-========================================================= */
-
-.process-section {
-    padding: 130px 0 140px;
-
-    background: #f8f8f8;
-}
-
-.process-heading {
-    max-width: 700px;
-
-    margin-bottom: 75px;
-}
-
-.process-heading .gold-line {
-    margin-bottom: 28px;
-}
-
-.process-label {
-    display: block;
-
-    font-size: 12px;
-
-    font-weight: 600;
-
-    letter-spacing: 3px;
-
-    color: #777777;
-
-    margin-bottom: 24px;
-}
-
-.process-heading h2 {
-    font-size: 52px;
-
-    line-height: 1.03;
-
-    letter-spacing: -2.5px;
-
-    font-weight: 800;
-
-    color: #111111;
-}
-
-.process-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 55px;
-}
-
-.process-item {
-    padding-top: 5px;
-}
-
-.process-top {
-    display: flex;
-
-    align-items: center;
-
-    margin-bottom: 35px;
-}
-
-.process-number {
-    font-size: 13px;
-
-    font-weight: 600;
-
-    letter-spacing: 2px;
-
-    color: var(--gold);
-
-    white-space: nowrap;
-}
-
-.process-line {
-    height: 1px;
-
-    background: #d5d5d5;
-
-    flex: 1;
-
-    margin-left: 22px;
-}
-
-.process-item h3 {
-    font-size: 22px;
-
-    line-height: 1.2;
-
-    font-weight: 700;
-
-    letter-spacing: 3px;
-
-    color: #111111;
-
-    margin-bottom: 18px;
-}
-
-.process-item p {
-    max-width: 350px;
-
-    font-size: 16px;
-
-    line-height: 1.8;
-
-    font-weight: 300;
-
-    color: #666666;
-}
-
-
-/* =========================================================
-   RECENT LEGISLATION
-========================================================= */
-
-.legislation-section {
-    padding: 120px 0;
-}
-
-.legislation-header {
-    display: flex;
-
-    align-items: flex-end;
-
-    justify-content: space-between;
-
-    margin-bottom: 45px;
-}
-
-.legislation-header .gold-line {
-    margin-bottom: 28px;
-}
-
-.legislation-header h2 {
-    font-size: 34px;
-
-    letter-spacing: 4px;
-
-    font-weight: 800;
-
-    margin-bottom: 8px;
-}
-
-.legislation-header p {
-    color: #777777;
-
-    font-size: 15px;
-
-    font-weight: 300;
-}
-
-.view-all {
-    font-size: 13px;
-
-    letter-spacing: 2px;
-
-    color: #222222;
-
-    padding-bottom: 8px;
-
-    border-bottom: 1px solid #222222;
-
-    transition: opacity 0.2s ease;
-}
-
-.view-all:hover {
-    opacity: 0.5;
-}
-
-
-/* =========================================================
-   SEARCH
-========================================================= */
-
-.search-area {
-    display: flex;
-
-    width: 100%;
-
-    margin-bottom: 30px;
-}
-
-.search-area input {
-    flex: 1;
-
-    height: 52px;
-
-    border: 1px solid #dddddd;
-
-    border-right: none;
-
-    padding: 0 22px;
-
-    outline: none;
-
-    font-size: 15px;
-
-    color: #222222;
-
-    font-weight: 300;
-}
-
-.search-area input::placeholder {
-    color: #999999;
-}
-
-.search-area input:focus {
-    border-color: #999999;
-}
-
-.search-area button {
-    width: 130px;
-
-    border: 1px solid #111111;
-
-    background: #111111;
-
-    color: #ffffff;
-
-    cursor: pointer;
-
-    font-size: 12px;
-
-    font-weight: 600;
-
-    letter-spacing: 1px;
-
-    transition: opacity 0.2s ease;
-}
-
-.search-area button:hover {
-    opacity: 0.85;
-}
-
-
-/* =========================================================
-   RESULT COUNT
-========================================================= */
-
-.result-count {
-    font-size: 13px;
-
-    color: #777777;
-
-    margin-bottom: 15px;
-}
-
-
-/* =========================================================
-   RESULTS
-========================================================= */
-
-.results {
-    border-top: 1px solid #dddddd;
-}
-
-.bill-row {
-    min-height: 105px;
-
-    display: grid;
-
-    grid-template-columns:
-        44%
-        20%
-        14%
-        14%
-        8%;
-
-    align-items: center;
-
-    border-bottom: 1px solid #e5e5e5;
-
-    transition:
-        background 0.2s ease,
-        transform 0.2s ease;
-
-    cursor: pointer;
-}
-
-.bill-row:hover {
-    background: #fafafa;
-}
-
-.bill-name {
-    padding-left: 15px;
-
-    padding-right: 35px;
-
-    font-size: 16px;
-
-    line-height: 1.55;
-
-    font-weight: 600;
-
-    color: #222222;
-}
-
-.bill-status {
-    font-size: 12px;
-
-    display: inline-flex;
-
-    width: max-content;
-
-    padding: 7px 14px;
-
-    border-radius: 20px;
-
-    background: #f1f1f1;
-
-    color: #666666;
-
-    white-space: nowrap;
-}
-
-.bill-info {
-    font-size: 13px;
-
-    color: #777777;
-
-    white-space: nowrap;
-}
-
-.bill-arrow {
-    text-align: right;
-
-    padding-right: 15px;
-
-    font-size: 27px;
-
-    color: #444444;
-}
-
-.bill-arrow a {
-    display: inline-block;
-
-    transition:
-        transform 0.2s ease,
-        opacity 0.2s ease;
-}
-
-.bill-arrow a:hover {
-    transform: translateX(5px);
-
-    opacity: 0.5;
-}
-
-
-/* =========================================================
-   EMPTY STATE
-========================================================= */
-
-.empty-state {
-    display: none;
-
-    padding: 70px 20px;
-
-    text-align: center;
-
-    border-bottom: 1px solid var(--border);
-}
-
-.empty-state h3 {
-    font-size: 22px;
-
-    margin-bottom: 8px;
-}
-
-.empty-state p {
-    color: #777777;
-
-    font-size: 14px;
-}
-
-
-/* =========================================================
-   PAGINATION
-========================================================= */
-
-.pagination {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 30px;
-
-    margin-top: 45px;
-}
-
-.pagination button {
-    border: none;
-
-    background: transparent;
-
-    cursor: pointer;
-
-    font-size: 12px;
-
-    letter-spacing: 1px;
-
-    color: #333333;
-
-    transition: opacity 0.2s ease;
-}
-
-.pagination button:hover:not(:disabled) {
-    opacity: 0.5;
-}
-
-.pagination button:disabled {
-    color: #cccccc;
-
-    cursor: default;
-}
-
-#pageNumber {
-    font-size: 13px;
-
-    color: #777777;
-}
-
-
-/* =========================================================
-   TEST NOTICE
-========================================================= */
-
-.test-notice {
-    padding: 35px 0;
-
-    background: #f8f8f8;
-
-    border-top: 1px solid var(--border);
-}
-
-.notice-inner {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 20px;
-}
-
-.notice-label {
-    font-size: 11px;
-
-    letter-spacing: 2px;
-
-    border: 1px solid #999999;
-
-    padding: 5px 10px;
-}
-
-.notice-inner p {
-    font-size: 13px;
-
-    color: #777777;
-}
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-.footer {
-    padding: 55px 0;
-
-    border-top: 1px solid var(--border);
-}
-
-.footer-inner {
-    display: grid;
-
-    grid-template-columns:
-        1fr
-        1fr
-        1fr;
-
-    align-items: center;
-}
-
-.footer-brand {
-    display: flex;
-
-    flex-direction: column;
-}
-
-.footer-brand strong {
-    font-size: 22px;
-
-    font-weight: 800;
-}
-
-.footer-brand span {
-    font-size: 12px;
-
-    color: #888888;
-
-    margin-top: 5px;
-}
-
-.footer-nav {
-    display: flex;
-
-    justify-content: center;
-
-    gap: 25px;
-}
-
-.footer-nav a {
-    font-size: 11px;
-
-    letter-spacing: 1px;
-}
-
-.footer-copy {
-    text-align: right;
-
-    font-size: 12px;
-
-    color: #888888;
-}
-
-/* =========================================================
-   BILL DETAILS — FINAL LAYOUT
-========================================================= */
-
-
-/* ---------------------------------------------------------
-   BACK → BILL TYPE SPACING
---------------------------------------------------------- */
-
-.bill-back {
-    margin-bottom: 0px;
-    padding-bottom: 50px;
-}
-
-
-/* ---------------------------------------------------------
-   TITLE
---------------------------------------------------------- */
-
-.bill-details-header {
-    width: 64%;
-    max-width: none;
-
-    margin-bottom: 32px;
-}
-
-.bill-details-header h1 {
-    width: 100%;
-    max-width: none;
-
-    font-family:
-        "Noto Sans Georgian",
-        Arial,
-        sans-serif;
-
-    font-size: 20px;
-    line-height: 1.5;
-    font-weight: 700;
-    letter-spacing: 0;
-
-    color: #111111;
-
-    margin: 0;
-}
-
-
-/* ---------------------------------------------------------
-   DESCRIPTION
---------------------------------------------------------- */
-
-.bill-description-section {
-    float: left;
-
-    width: 64%;
-    max-width: none;
-
-    padding: 26px 50px 28px 0;
-
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-}
-
-.bill-description-section h2 {
-    margin-bottom: 15px;
-
-    font-size: 11px;
-    line-height: 1.4;
-
-    font-weight: 700;
-    letter-spacing: 3px;
-
-    color: #111111;
-}
-
-.bill-description-section p {
-    max-width: none;
-
-    margin: 0;
-
-    font-family:
-        "Noto Sans Georgian",
-        Arial,
-        sans-serif;
-
-    font-size: 15px;
-    line-height: 1.7;
-
-    font-weight: 400;
-
-    color: #666666;
-
-    text-align: justify;
-    text-justify: inter-word;
-}
-
-
-/* ---------------------------------------------------------
-   REGISTRATION INFORMATION
-   Align content with DESCRIPTION text
---------------------------------------------------------- */
-
-.bill-information {
-    float: right;
-
-    width: 36%;
-    max-width: none;
-
-    padding: 66px 0 28px 45px;
-
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-}
-
-.bill-information-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, minmax(0, 1fr));
-
-    column-gap: 45px;
-    row-gap: 27px;
-
-    width: 100%;
-}
-
-.bill-field {
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: flex-start;
-
-    gap: 6px;
-
-    min-width: 0;
-}
-
-.bill-field-label {
-    font-family:
-        "Open Sans",
-        Arial,
-        sans-serif;
-
-    font-size: 8px;
-    line-height: 1.4;
-
-    font-weight: 600;
-    letter-spacing: 2px;
-
-    color: #999999;
-
-    white-space: nowrap;
-}
-
-.bill-field-value {
-    font-family:
-        "Noto Sans Georgian",
-        Arial,
-        sans-serif;
-
-    font-size: 14px;
-    line-height: 1.5;
-
-    font-weight: 400;
-
-    color: #222222;
-
-    white-space: nowrap;
-}
-
-
-/* ---------------------------------------------------------
-   INITIATOR / AUTHOR / PACKAGE
---------------------------------------------------------- */
-
-.bill-person-section {
-    clear: both;
-
-    width: 100%;
-    max-width: none;
-
-    padding: 24px 0;
-
-    border-bottom: 1px solid var(--border);
-}
-
-.bill-person-section h2 {
-    margin-bottom: 11px;
-
-    font-size: 11px;
-    line-height: 1.4;
-
-    font-weight: 700;
-    letter-spacing: 3px;
-
-    color: #111111;
-}
-
-.bill-person-section p {
-    width: calc(64% - 50px);
-    max-width: none;
-
-    margin: 0;
-
-    font-family:
-        "Noto Sans Georgian",
-        Arial,
-        sans-serif;
-
-    font-size: 14px;
-    line-height: 1.65;
-
-    font-weight: 400;
-
-    color: #666666;
-
-    text-align: justify;
-    text-justify: inter-word;
-}
-
-
-/* ---------------------------------------------------------
-   OFFICIAL LINK
---------------------------------------------------------- */
-
-.bill-official-link {
-    clear: both;
-
-    padding-top: 25px;
-}
-
-.bill-official-link a {
-    font-size: 10px;
-    letter-spacing: 1.5px;
-}
-
-
-/* =========================================================
-   TABLET
-========================================================= */
-
-@media (max-width: 850px) {
-
-    .bill-back {
-        margin-bottom: 38px;
-    }
-
-    .bill-details-header {
-        width: 100%;
-        max-width: none;
-
-        margin-bottom: 30px;
-    }
-
-    .bill-details-header h1 {
-        width: 100%;
-        max-width: none;
-
-        font-size: 20px;
-        line-height: 1.5;
-    }
-
-
-    .bill-description-section {
-        float: none;
-
-        width: 100%;
-
-        padding: 26px 0;
-
-        border-bottom: 1px solid var(--border);
-    }
-
-
-    .bill-information {
-        float: none;
-
-        width: 100%;
-
-        padding: 26px 0;
-
-        border-top: none;
-        border-bottom: 1px solid var(--border);
-    }
-
-
-    .bill-information-grid {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-
-        column-gap: 40px;
-        row-gap: 24px;
-    }
-
-
-    .bill-person-section {
-        padding: 24px 0;
-    }
-
-    .bill-person-section p {
-        width: 100%;
-        max-width: none;
-
-        text-align: justify;
-        text-justify: inter-word;
-    }
-
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 550px) {
-
-    .bill-back {
-        margin-bottom: 32px;
-    }
-
-    .bill-details-header {
-        width: 100%;
-
-        margin-bottom: 25px;
-    }
-
-    .bill-details-header h1 {
-        font-size: 20px;
-        line-height: 1.5;
-    }
-
-
-    .bill-description-section {
-        padding: 22px 0;
-    }
-
-
-    .bill-description-section h2,
-    .bill-person-section h2 {
-        font-size: 10px;
-        letter-spacing: 2.5px;
-    }
-
-
-    .bill-description-section p {
-        font-size: 14px;
-        line-height: 1.7;
-
-        text-align: justify;
-        text-justify: inter-word;
-    }
-
-
-    .bill-information {
-        padding: 22px 0;
-    }
-
-
-    .bill-information-grid {
-        grid-template-columns: 1fr;
-
-        row-gap: 20px;
-    }
-
-
-    .bill-field-label {
-        font-size: 8px;
-    }
-
-
-    .bill-field-value {
-        font-size: 14px;
-    }
-
-
-    .bill-person-section {
-        padding: 22px 0;
-    }
-
-
-    .bill-person-section p {
-        width: 100%;
-        max-width: none;
-
-        font-size: 14px;
-        line-height: 1.7;
-
-        text-align: justify;
-        text-justify: inter-word;
-    }
-
-
-    .bill-official-link {
-        padding-top: 22px;
-    }
-/* MOBILE HERO FIX */
-
-.hero {
-    padding-top: 40px;
-    padding-bottom: 55px;
-}
-
-.hero-inner {
-    grid-template-columns: 1fr;
-}
-
-.hero-content {
-    width: 100%;
-    padding-right: 0;
-}
-
-.hero h1 {
-    font-size: 43px;
-    line-height: 1.08;
-    letter-spacing: -1.5px;
-    margin-bottom: 38px;
-}
-
-.hero-description {
-    width: 100%;
-    max-width: 100%;
-    font-size: 17px;
-    line-height: 1.9;
-    margin-bottom: 45px;
-}
-
-.hero-visual {
-    width: 100%;
-    height: auto;
-    margin-top: 10px;
-    padding: 0;
-}
-
-.law-sketch {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    transform: none;
-}
-}
-
-/* =========================================================
-   HOMEPAGE — MOBILE FIX
-========================================================= */
-
-@media (max-width: 550px) {
-
-    /* CONTAINER */
-
-    .container {
-        width: calc(100% - 30px);
-        max-width: none;
-    }
-
-
- /* HEADER */
-
-.site-header {
-    height: auto;
-    min-height: 100px;
-    padding: 18px 0;
-}
-
-.header-inner {
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-}
-
-.logo {
-    gap: 10px;
-    height: auto;
-    min-width: 0;
-}
-
-.main-nav {
-    width: 100%;
-    margin: 0;
-    display: flex;
-    justify-content: flex-start;
-    gap: 16px;
-    flex-wrap: nowrap;
-    padding-left: 9px;
-}
-
-.logo-mark {
-    width: 68px;
-    height: 40px;
-}
-
-.logo-info {
-    gap: 4px;
-    min-width: 0;
-}
-
-.logo-text {
-    font-size: 29px;
-    letter-spacing: -1px;
-}
-
-.logo-tagline {
-    font-size: 7px;
-    letter-spacing: 1.4px;
-}
-
-.header-social {
-    display: none;
-}
-
-.main-nav {
-    width: 100%;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-}
-
-.main-nav a {
-    font-size: 12px;
-    padding: 6px 0;
-    white-space: nowrap;
-    letter-spacing: 0.3px;
-}
-
-.main-nav a::after {
-    bottom: 0;
-}
-
-    /* HERO */
-
-    .hero {
-        min-height: auto;
-        padding: 35px 0 60px;
-    }
-
-    .hero-inner {
-        display: grid;
-        grid-template-columns: 1fr;
-        min-height: auto;
-    }
-
-    .hero-content {
-        width: 100%;
-        padding-right: 0;
-    }
-
-    .hero h1 {
-        width: 100%;
-        max-width: none;
-        font-size: 45px;
-        line-height: 0.98;
-        letter-spacing: -2px;
-        margin-bottom: 38px;
-    }
-
-    .hero-description {
-        width: 100%;
-        max-width: none;
-        font-size: 16px;
-        line-height: 1.7;
-        margin-bottom: 30px;
-    }
-
-
-    /* UPDATE FORM */
-
-    .update-form {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        max-width: none;
-    }
-
-    .update-form input {
-        min-width: 0;
-        width: 55%;
-        height: 56px;
-        padding: 0 14px;
-        border-right: none;
-        font-size: 13px;
-    }
-
-    .update-form .outline-button {
-        width: 45%;
-        min-width: 0;
-        height: 56px;
-        padding: 0 16px;
-        gap: 10px;
-        font-size: 11px;
-        letter-spacing: 1px;
-    }
-
-    .button-arrow {
-        font-size: 20px;
-    }
-
-
-    /* HERO IMAGE */
-
-    .hero-visual {
-        width: 100%;
-        height: auto;
-        margin-top: 50px;
-        padding: 0;
-        justify-content: center;
-    }
-
-    .law-sketch {
-        width: 100%;
-        max-width: none;
-        transform: none;
-    }
-
-
-    /* FEATURES */
-
-    .features {
-        padding: 45px 0;
-    }
-
-    .features-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 0;
-        width: 100%;
-    }
-
-    .feature {
-        width: 100%;
-        min-width: 0;
-        display: flex;
-        align-items: flex-start;
-        gap: 22px;
-        padding: 25px 0;
-        border-right: none;
-        border-bottom: 1px solid var(--border);
-    }
-
-    .feature:first-child {
-        padding-left: 0;
-    }
-
-    .feature:last-child {
-        border-bottom: none;
-        padding-bottom: 0;
-    }
-
-    .feature-icon {
-        width: 42px;
-        min-width: 42px;
-        height: 42px;
-    }
-
-    .feature-icon svg {
-        width: 38px;
-        height: 38px;
-    }
-
-    .feature h3 {
-        font-size: 13px;
-        line-height: 1.4;
-        margin-bottom: 9px;
-    }
-
-    .feature p {
-        max-width: none;
-        font-size: 15px;
-        line-height: 1.7;
-    }
-
-
-    /* ABOUT */
-
-    .about-section {
-        padding: 90px 0;
-    }
-
-    .about-inner {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 40px;
-        width: 100%;
-    }
-
-    .section-heading {
-        width: 100%;
-    }
-
-    .section-heading h2 {
-        font-size: 38px;
-        line-height: 1.02;
-        letter-spacing: -2px;
-    }
-
-    .about-text {
-        width: 100%;
-        max-width: none;
-        padding-top: 0;
-    }
-
-    .about-lead {
-        font-size: 22px !important;
-        line-height: 1.45 !important;
-    }
-
-    .about-text p {
-        font-size: 16px;
-        line-height: 1.8;
-    }
-
-
-    /* HOW IT WORKS */
-
-    .process-section {
-        padding: 90px 0;
-    }
-
-    .process-heading {
-        width: 100%;
-        max-width: none;
-        margin-bottom: 50px;
-    }
-
-    .process-heading h2 {
-        font-size: 38px;
-        line-height: 1.03;
-        letter-spacing: -2px;
-    }
-
-    .process-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 0;
-        width: 100%;
-    }
-
-    .process-item {
-        width: 100%;
-        min-width: 0;
-        padding: 30px 0;
-        border-bottom: 1px solid var(--border);
-    }
-
-    .process-item:last-child {
-        border-bottom: none;
-    }
-
-    .process-top {
-        width: 100%;
-        margin-bottom: 25px;
-    }
-
-    .process-item h3 {
-        font-size: 19px;
-        line-height: 1.25;
-        letter-spacing: 2.5px;
-    }
-
-    .process-item p {
-        max-width: none;
-        font-size: 16px;
-        line-height: 1.8;
-    }
-
-
-    /* RECENT LEGISLATION */
-
-    .legislation-section {
-        padding: 90px 0;
-    }
-
-    .legislation-header {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 25px;
-        margin-bottom: 35px;
-    }
-
-    .legislation-header h2 {
-        font-size: 38px;
-        line-height: 1.05;
-        letter-spacing: 3px;
-    }
-
-    .legislation-header p {
-        font-size: 15px;
-        line-height: 1.7;
-    }
-
-    .view-all {
-        font-size: 12px;
-    }
-
-
-    /* SEARCH */
-
-    .search-area {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        margin-bottom: 25px;
-    }
-
-    .search-area input {
-        min-width: 0;
-        width: auto;
-        flex: 1;
-        height: 52px;
-        padding: 0 14px;
-        border-right: none;
-        font-size: 14px;
-    }
-
-    .search-area button {
-        width: 110px;
-        min-width: 110px;
-        height: 52px;
-    }
-
-
-    /* BILL LIST */
-
-    .bill-row {
-        width: 100%;
-        min-width: 0;
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 12px;
-        padding: 22px 0;
-    }
-
-    .bill-name {
-        width: 100%;
-        min-width: 0;
-        grid-column: 1;
-        padding: 0;
-        font-size: 17px;
-        line-height: 1.55;
-        overflow-wrap: anywhere;
-    }
-
-    .bill-status {
-        grid-column: 1;
-        grid-row: auto;
-        font-size: 11px;
-        white-space: normal;
-    }
-
-    .bill-info {
-        grid-column: 1;
-        grid-row: auto;
-        font-size: 12px;
-        white-space: normal;
-    }
-
-    .bill-arrow {
-        grid-column: 1;
-        grid-row: auto;
-        padding-right: 0;
-        text-align: left;
-        font-size: 24px;
-    }
-
-
-    /* RESULT COUNT */
-
-    .result-count {
-        font-size: 13px;
-        margin-bottom: 15px;
-    }
-
-
-    /* PAGINATION */
-
-    .pagination {
-        gap: 20px;
-        margin-top: 35px;
-    }
-
-
-    /* FOOTER */
-
-    .footer {
-        padding: 45px 0;
-    }
-
-    .footer-inner {
-        grid-template-columns: 1fr;
-        gap: 30px;
-        text-align: center;
-    }
-
-    .footer-brand {
-        align-items: center;
-    }
-
-    .footer-copy {
-        text-align: center;
-    }
-
-}
-
-/* =====================================================
-   LANGUAGE SWITCHER
-===================================================== */
+/* ---------- Language switcher ---------- */
 
 .language-switcher {
     display: flex;
     align-items: center;
-    gap: 5px;
-    margin-left: 28px;
+    gap: 6px;
+    margin: 0 18px 0 0;
+    padding: 0;
     white-space: nowrap;
-}
-
-.language-switcher span {
-    color: #777;
-    font-size: 13px;
-    line-height: 1;
-}
-
-.language-switcher button {
-    appearance: none;
-    -webkit-appearance: none;
-
-    border: none;
-    outline: none;
-
-    background: transparent;
-
-    color: #bdbdbd;
-
-    font-family: "Open Sans", sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-
-    padding: 3px 0;
-
-    cursor: pointer;
-
-    transition:
-        color 0.2s ease,
-        opacity 0.2s ease;
-}
-
-.language-switcher button:hover {
-    color: #ffffff;
-}
-
-.language-switcher button.active {
-    color: #ffffff;
-}
-
-
-/* =====================================================
-   GEORGIAN HERO TYPOGRAPHY
-===================================================== */
-
-html[lang="ka"] .hero h1 {
-    font-family:
-        "Noto Sans Georgian",
-        sans-serif;
-
-    font-size: 56px;
-    line-height: 0.98;
-
-    font-weight: 800;
-
-    letter-spacing: -1.8px;
-
-    max-width: 720px;
-}
-
-
-/* =====================================================
-   GEORGIAN HERO DESCRIPTION
-===================================================== */
-
-html[lang="ka"] .hero-description {
-    font-family:
-        "Noto Sans Georgian",
-        sans-serif;
-
-    font-size: 17px;
-    line-height: 1.65;
-
-    max-width: 650px;
-}
-
-
-/* =====================================================
-   GEORGIAN HERO FORM
-===================================================== */
-
-html[lang="ka"] .update-form input {
-    font-family:
-        "Noto Sans Georgian",
-        sans-serif;
-}
-
-html[lang="ka"] .update-form button {
-    font-family:
-        "Noto Sans Georgian",
-        sans-serif;
-}
-
-
-/* =====================================================
-   GEORGIAN SECTION HEADINGS
-===================================================== */
-
-html[lang="ka"] .about-section h2,
-html[lang="ka"] .process-section h2,
-html[lang="ka"] .legislation-section h2 {
-    font-family:
-        "Noto Sans Georgian",
-        sans-serif;
-
-    letter-spacing: -1px;
-}
-
-
-/* =====================================================
-   GEORGIAN NAVIGATION
-===================================================== */
-
-html[lang="ka"] .main-nav a {
-    font-family:
-        "Noto Sans Georgian",
-        sans-serif;
-}
-
-
-/* =====================================================
-   GEORGIAN FEATURE / PROCESS HEADINGS
-===================================================== */
-
-html[lang="ka"] .feature h3,
-html[lang="ka"] .process-item h3 {
-    font-family:
-        "Noto Sans Georgian",
-        sans-serif;
-}
-
-
-/* =====================================================
-   GEORGIAN GENERAL TEXT
-===================================================== */
-
-html[lang="ka"] .about-text,
-html[lang="ka"] .process-item p,
-html[lang="ka"] .feature p,
-html[lang="ka"] .legislation-section p {
-    font-family:
-        "Noto Sans Georgian",
-        sans-serif;
-}
-
-/* =====================================================
-   HERO TITLE - FINAL GEORGIAN SPACING
-===================================================== */
-
-html[lang="ka"] .hero h1 {
-    font-size: 54px;
-    line-height: 1.02;
-    letter-spacing: -1.2px;
-}
-
-
-/* Space between LIVE and Georgian text */
-
-html[lang="ka"] .hero h1 span {
-    display: inline-block;
-    margin-right: 14px;
-    letter-spacing: -1px;
-}
-
-
-/* Keep LIVE რეჟიმში together */
-
-html[lang="ka"] .hero h1 {
-    white-space: normal;
-}
-
-/* =====================================================
-   HERO TITLE - GEORGIAN FINAL POLISH
-===================================================== */
-
-html[lang="ka"] .hero h1 {
-    font-size: 54px;
-    line-height: 1.04;
-    font-weight: 700;
-    letter-spacing: -1px;
-}
-
-
-/* LIVE spacing */
-
-html[lang="ka"] .hero h1 span {
-    display: inline-block;
-    margin-right: 16px;
-    font-weight: 800;
-}
-
-/* =====================================================
-   HEADER - FINAL POLISH
-===================================================== */
-
-.site-header {
-    position: relative;
-    z-index: 100;
-}
-
-
-/* Main header layout */
-
-.header-inner {
-    display: flex;
-    align-items: center;
-}
-
-
-/* =====================================================
-   LOGO
-===================================================== */
-
-.logo {
-    display: flex;
-    align-items: center;
     flex-shrink: 0;
 }
 
-.logo-info {
-    display: flex;
-    flex-direction: column;
-}
-
-.logo-text {
-    line-height: 1;
-}
-
-.logo-tagline {
-    margin-top: 5px;
-    line-height: 1;
-}
-
-
-/* =====================================================
-   MAIN NAVIGATION
-===================================================== */
-
-.main-nav {
-    display: flex;
-    align-items: center;
-
-    margin-left: auto;
-    margin-right: 34px;
-
-    gap: 38px;
-}
-
-.main-nav a {
-    white-space: nowrap;
-}
-
-
-/* =====================================================
-   LANGUAGE SWITCHER
-===================================================== */
-
-.language-switcher {
-    display: flex;
-    align-items: center;
-
-    gap: 6px;
-
-    margin: 0 24px 0 0;
-
-    padding: 0;
-
-    white-space: nowrap;
-}
-
 .language-switcher span {
-    color: #777;
+    color: #777777;
 
     font-family:
         "Open Sans",
@@ -2449,12 +229,9 @@ html[lang="ka"] .hero h1 span {
 .language-switcher button {
     appearance: none;
     -webkit-appearance: none;
-
     border: 0;
     outline: 0;
-
     background: transparent;
-
     color: #8d8d8d;
 
     font-family:
@@ -2464,11 +241,8 @@ html[lang="ka"] .hero h1 span {
 
     font-size: 12px;
     font-weight: 600;
-
     line-height: 1;
-
     padding: 0;
-
     cursor: pointer;
 
     transition:
@@ -2476,168 +250,14 @@ html[lang="ka"] .hero h1 span {
         opacity 0.2s ease;
 }
 
-.language-switcher button:hover {
-    color: #ffffff;
-}
-
+.language-switcher button:hover,
 .language-switcher button.active {
     color: #ffffff;
 }
 
 
-/* =====================================================
-   SOCIAL ICONS
-===================================================== */
+/* ---------- Auth buttons / user menu ---------- */
 
-.header-social {
-    display: flex;
-    align-items: center;
-
-    gap: 22px;
-
-    flex-shrink: 0;
-}
-
-.header-social a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    min-width: 16px;
-
-    color: #ffffff;
-
-    text-decoration: none;
-
-    font-family:
-        "Open Sans",
-        sans-serif;
-
-    font-size: 15px;
-    font-weight: 600;
-
-    line-height: 1;
-
-    opacity: 0.9;
-
-    transition:
-        opacity 0.2s ease,
-        transform 0.2s ease;
-}
-
-.header-social a:hover {
-    opacity: 1;
-    transform: translateY(-1px);
-}
-
-
-/* =====================================================
-   HEADER BALANCE
-===================================================== */
-
-.logo-mark {
-    flex-shrink: 0;
-}
-
-.header-social {
-    margin-left: 0;
-}
-
-
-/* =====================================================
-   GEORGIAN HEADER NAVIGATION
-===================================================== */
-
-html[lang="ka"] .main-nav a {
-    font-family:
-        "Noto Sans Georgian",
-        sans-serif;
-
-    font-size: 15px;
-    font-weight: 600;
-}
-
-
-/* =====================================================
-   DESKTOP HEADER WIDTH
-===================================================== */
-
-@media (min-width: 1100px) {
-
-    .header-inner {
-        min-height: 82px;
-    }
-
-    .main-nav {
-        gap: 42px;
-    }
-
-    .language-switcher {
-        margin-right: 26px;
-    }
-
-    .header-social {
-        gap: 22px;
-    }
-
-}
-
-
-/* =====================================================
-   SMALLER DESKTOP
-===================================================== */
-
-@media (max-width: 1100px) {
-
-    .main-nav {
-        gap: 22px;
-        margin-right: 22px;
-    }
-
-    .language-switcher {
-        margin-right: 18px;
-    }
-
-    .header-social {
-        gap: 16px;
-    }
-
-}
-
-/* =====================================================
-   LEGISWATCH — GEORGIAN HERO / COMPACT
-   ===================================================== */
-
-html[lang="ka"] .hero h1 {
-    font-family: "Noto Sans Georgian", sans-serif;
-
-    font-size: 58px;
-    line-height: 0.98;
-
-    font-weight: 700;
-
-    letter-spacing: -1.2px;
-
-    font-stretch: condensed;
-
-    max-width: 680px;
-}
-
-html[lang="ka"] .hero h1 span {
-    font-family: "Open Sans", sans-serif;
-
-    display: inline-block;
-
-    margin-right: 20px;
-
-    font-size: 58px;
-    font-weight: 800;
-
-    letter-spacing: -2px;
-}
-
-
-/* Authentication buttons in header */
 .auth-buttons {
     display: flex;
     align-items: center;
@@ -2660,90 +280,912 @@ html[lang="ka"] .hero h1 span {
 .login-button:hover,
 .signup-button:hover {
     background: #ffffff;
-    color: #111111;
+    color: var(--black);
 }
 
 
-/* AUTHENTICATION MODAL */
+/* ---------- Social ---------- */
 
-.auth-modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.75);
+.header-social {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-shrink: 0;
+}
+
+.header-social a {
+    display: flex;
+    align-items: center;
     justify-content: center;
+    min-width: 16px;
+    color: #ffffff;
+
+    font-family:
+        "Open Sans",
+        sans-serif;
+
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1;
+    opacity: 0.9;
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+}
+
+.header-social a:hover {
+    opacity: 1;
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   3. HERO
+========================================================= */
+
+.hero {
+    min-height: 650px;
+    display: flex;
+    align-items: flex-start;
+    padding-top: 32px;
+    scroll-margin-top: var(--header-height);
+}
+
+.hero-inner {
+    display: grid;
+    grid-template-columns: 45% 55%;
+    align-items: start;
+    min-height: 650px;
+}
+
+.hero-content {
+    padding-right: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.hero .gold-line {
+    display: none;
+}
+
+.hero h1 {
+    font-size: clamp(52px, 4.7vw, 68px);
+    line-height: 0.98;
+    font-weight: 800;
+    letter-spacing: -2.8px;
+    color: var(--black);
+    margin-bottom: 38px;
+    max-width: 650px;
+}
+
+.hero-description {
+    max-width: 570px;
+    font-size: 19px;
+    line-height: 1.7;
+    font-weight: 300;
+    color: var(--gray);
+    margin-bottom: 35px;
+}
+
+
+/* ---------- Email form ---------- */
+
+.update-form {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    max-width: 620px;
+}
+
+.update-form input {
+    flex: 1;
+    min-width: 0;
+    height: 56px;
+    padding: 0 20px;
+    border: 1px solid var(--black);
+    border-right: none;
+    outline: none;
+    background: #ffffff;
+    color: #222222;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.update-form input::placeholder {
+    color: var(--light-gray);
+}
+
+.update-form input:focus {
+    border-color: var(--gold);
+}
+
+.outline-button {
+    min-width: 250px;
+    height: 56px;
+    padding: 0 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    border: 1px solid var(--black);
+    background: var(--black);
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+
+    transition:
+        background 0.25s ease,
+        color 0.25s ease;
+}
+
+.outline-button:hover {
+    background: #ffffff;
+    color: var(--black);
+}
+
+.outline-button:disabled {
+    opacity: 0.55;
+    cursor: wait;
+}
+
+.button-arrow {
+    font-size: 22px;
+    line-height: 1;
+}
+
+.status {
+    min-height: 22px;
+    margin-top: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+
+/* ---------- Hero visual ---------- */
+
+.hero-visual {
+    height: 620px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    padding-left: 20px;
+    padding-right: 5px;
+}
+
+.law-sketch {
+    width: 100%;
+    max-width: 760px;
+    height: auto;
+    object-fit: contain;
+
+    filter:
+        grayscale(100%)
+        contrast(105%);
+
+    mix-blend-mode: multiply;
+    opacity: 0.92;
+
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 12%,
+        black 88%,
+        transparent 100%
+    );
+
+    mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 12%,
+        black 88%,
+        transparent 100%
+    );
+
+    transform: translate(25px, -90px);
+}
+
+
+/* =========================================================
+   4. FEATURES
+========================================================= */
+
+.features {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 55px 0;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 28px;
+    min-height: 95px;
+    padding: 5px 45px;
+    border-right: 1px solid var(--border);
+}
+
+.feature:first-child {
+    padding-left: 10px;
+}
+
+.feature:last-child {
+    border-right: none;
+}
+
+.feature-icon {
+    width: 48px;
+    min-width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-icon svg {
+    width: 42px;
+    height: 42px;
+    fill: none;
+    stroke: var(--black);
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.feature h3 {
+    font-size: 13px;
+    line-height: 1.4;
+    letter-spacing: 2.5px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 9px;
+}
+
+.feature p {
+    max-width: 290px;
+    font-size: 15px;
+    line-height: 1.7;
+    font-weight: 300;
+    color: var(--gray);
+}
+
+
+/* =========================================================
+   5. ABOUT
+========================================================= */
+
+.about-section {
+    padding: 145px 0 155px;
+    background: #ffffff;
+}
+
+.about-inner {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    gap: 90px;
+    align-items: start;
+}
+
+.section-heading {
+    padding-top: 5px;
+}
+
+.section-heading .gold-line {
+    margin-bottom: 28px;
+}
+
+.about-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: var(--muted);
+    margin-bottom: 24px;
+}
+
+.section-heading h2 {
+    font-size: 52px;
+    line-height: 1.02;
+    letter-spacing: -2.5px;
+    font-weight: 800;
+    color: var(--black);
+}
+
+.about-text {
+    max-width: 650px;
+    padding-top: 8px;
+}
+
+.about-text p {
+    font-size: 17px;
+    line-height: 1.85;
+    color: var(--gray);
+    font-weight: 300;
+    margin-bottom: 26px;
+}
+
+.about-text p:last-child {
+    margin-bottom: 0;
+}
+
+/* (0,2,0) სპეციფიკურობა — !important აღარ არის საჭირო */
+.about-text .about-lead {
+    font-size: 26px;
+    line-height: 1.45;
+    font-weight: 300;
+    color: var(--dark-gray);
+    margin-bottom: 32px;
+}
+
+
+/* =========================================================
+   6. HOW IT WORKS
+========================================================= */
+
+.process-section {
+    padding: 130px 0 140px;
+    background: var(--soft-bg);
+}
+
+.process-heading {
+    max-width: 700px;
+    margin-bottom: 75px;
+}
+
+.process-heading .gold-line {
+    margin-bottom: 28px;
+}
+
+.process-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: var(--muted);
+    margin-bottom: 24px;
+}
+
+.process-heading h2 {
+    font-size: 52px;
+    line-height: 1.03;
+    letter-spacing: -2.5px;
+    font-weight: 800;
+    color: var(--black);
+}
+
+.process-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 55px;
+}
+
+.process-item {
+    padding-top: 5px;
+}
+
+.process-top {
+    display: flex;
+    align-items: center;
+    margin-bottom: 35px;
+}
+
+.process-number {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--gold);
+    white-space: nowrap;
+}
+
+.process-line {
+    height: 1px;
+    background: #d5d5d5;
+    flex: 1;
+    margin-left: 22px;
+}
+
+.process-item h3 {
+    font-size: 22px;
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--black);
+    margin-bottom: 18px;
+}
+
+.process-item p {
+    max-width: 350px;
+    font-size: 16px;
+    line-height: 1.8;
+    font-weight: 300;
+    color: var(--gray);
+}
+
+
+/* =========================================================
+   7. RECENT LEGISLATION
+========================================================= */
+
+.legislation-section {
+    padding: 120px 0;
+}
+
+.legislation-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 45px;
+}
+
+.legislation-header .gold-line {
+    margin-bottom: 28px;
+}
+
+.legislation-header h2 {
+    font-size: 34px;
+    letter-spacing: 4px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.legislation-header p {
+    color: var(--muted);
+    font-size: 15px;
+    font-weight: 300;
+}
+
+.view-all {
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: #222222;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #222222;
+    transition: opacity 0.2s ease;
+}
+
+.view-all:hover {
+    opacity: 0.5;
+}
+
+
+/* ---------- Search ---------- */
+
+.search-area {
+    display: flex;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.search-area input {
+    flex: 1;
+    height: 52px;
+    border: 1px solid #dddddd;
+    border-right: none;
+    padding: 0 22px;
+    outline: none;
+    font-size: 15px;
+    color: #222222;
+    font-weight: 300;
+}
+
+.search-area input::placeholder {
+    color: var(--light-gray);
+}
+
+.search-area input:focus {
+    border-color: var(--light-gray);
+}
+
+.search-area button {
+    width: 130px;
+    border: 1px solid var(--black);
+    background: var(--black);
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: opacity 0.2s ease;
+}
+
+.search-area button:hover {
+    opacity: 0.85;
+}
+
+.result-count {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 15px;
+}
+
+
+/* ---------- Results ---------- */
+
+.results {
+    border-top: 1px solid #dddddd;
+}
+
+.bill-row {
+    min-height: 105px;
+    display: grid;
+    grid-template-columns: 44% 20% 14% 14% 8%;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.bill-row:hover {
+    background: #fafafa;
+}
+
+.bill-name {
+    padding-left: 15px;
+    padding-right: 35px;
+    font-size: 16px;
+    line-height: 1.55;
+    font-weight: 600;
+    color: #222222;
+}
+
+.bill-status {
+    font-size: 12px;
+    display: inline-flex;
+    width: max-content;
+    padding: 7px 14px;
+    border-radius: 20px;
+    background: #f1f1f1;
+    color: var(--gray);
+    white-space: nowrap;
+}
+
+.bill-info {
+    font-size: 13px;
+    color: var(--muted);
+    white-space: nowrap;
+}
+
+.bill-arrow {
+    text-align: right;
+    padding-right: 15px;
+    font-size: 27px;
+    color: #444444;
+}
+
+.bill-arrow a {
+    display: inline-block;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.bill-arrow a:hover {
+    transform: translateX(5px);
+    opacity: 0.5;
+}
+
+.empty-state {
+    display: none;
+    padding: 70px 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+}
+
+.empty-state h3 {
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+.empty-state p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+
+/* ---------- Pagination ---------- */
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 45px;
+}
+
+.pagination button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: var(--dark-gray);
+    transition: opacity 0.2s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+    opacity: 0.5;
+}
+
+.pagination button:disabled {
+    color: #cccccc;
+    cursor: default;
+}
+
+#pageNumber {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+
+/* =========================================================
+   8. TEST NOTICE / FOOTER
+========================================================= */
+
+.test-notice {
+    padding: 35px 0;
+    background: var(--soft-bg);
+    border-top: 1px solid var(--border);
+}
+
+.notice-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.notice-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    border: 1px solid var(--light-gray);
+    padding: 5px 10px;
+}
+
+.notice-inner p {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.footer {
+    padding: 55px 0;
+    border-top: 1px solid var(--border);
+}
+
+.footer-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
 }
 
-.auth-modal-content {
-    position: relative;
-    width: 90%;
-    max-width: 400px;
-    padding: 35px;
-    background: #111;
-    border: 1px solid #fff;
-    color: #fff;
-}
-
-.auth-close {
-    position: absolute;
-    top: 12px;
-    right: 15px;
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 28px;
-    cursor: pointer;
-}
-
-.auth-modal-content h2 {
-    margin: 0 0 25px;
-    text-align: center;
-    font-size: 24px;
-}
-
-.auth-modal-content form {
+.footer-brand {
     display: flex;
     flex-direction: column;
-    gap: 12px;
 }
 
-.auth-modal-content label {
-    font-size: 13px;
+.footer-brand strong {
+    font-size: 22px;
+    font-weight: 800;
 }
 
-.auth-modal-content input {
-    padding: 12px;
-    background: #000;
-    border: 1px solid #777;
-    color: #fff;
-    outline: none;
+.footer-brand span {
+    font-size: 12px;
+    color: #888888;
+    margin-top: 5px;
 }
 
-.auth-modal-content input:focus {
-    border-color: #fff;
+.footer-nav {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
 }
 
-.auth-submit {
-    margin-top: 15px;
-    padding: 12px;
-    background: #fff;
-    border: 1px solid #fff;
-    color: #000;
-    cursor: pointer;
-    font-weight: bold;
+.footer-nav a {
+    font-size: 11px;
+    letter-spacing: 1px;
 }
 
-.auth-message {
-    margin-top: 15px;
-    font-size: 13px;
-    text-align: center;
+.footer-copy {
+    text-align: right;
+    font-size: 12px;
+    color: #888888;
 }
 
-/* =====================================================
-   SAVE LEGISLATION BUTTON
-===================================================== */
+
+/* =========================================================
+   9. BILL DETAILS  (bill.html)
+========================================================= */
+
+.bill-back {
+    margin-bottom: 0;
+    padding-bottom: 50px;
+}
+
+.bill-details-header {
+    width: 64%;
+    max-width: none;
+    margin-bottom: 32px;
+}
+
+.bill-details-header h1 {
+    width: 100%;
+    max-width: none;
+
+    font-family:
+        "Noto Sans Georgian",
+        Arial,
+        sans-serif;
+
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: 700;
+    letter-spacing: 0;
+    color: var(--black);
+    margin: 0;
+}
+
+
+/* ---------- Description ---------- */
+
+.bill-description-section {
+    float: left;
+    width: 64%;
+    max-width: none;
+    padding: 26px 50px 28px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.bill-description-section h2 {
+    margin-bottom: 15px;
+    font-size: 11px;
+    line-height: 1.4;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--black);
+}
+
+.bill-description-section p {
+    max-width: none;
+    margin: 0;
+
+    font-family:
+        "Noto Sans Georgian",
+        Arial,
+        sans-serif;
+
+    font-size: 15px;
+    line-height: 1.7;
+    font-weight: 400;
+    color: var(--gray);
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+
+/* ---------- Registration information ---------- */
+
+.bill-information {
+    float: right;
+    width: 36%;
+    max-width: none;
+    padding: 66px 0 28px 45px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.bill-information-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 45px;
+    row-gap: 27px;
+    width: 100%;
+}
+
+.bill-field {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    min-width: 0;
+}
+
+.bill-field-label {
+    font-family:
+        "Open Sans",
+        Arial,
+        sans-serif;
+
+    font-size: 8px;
+    line-height: 1.4;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--light-gray);
+    white-space: nowrap;
+}
+
+.bill-field-value {
+    font-family:
+        "Noto Sans Georgian",
+        Arial,
+        sans-serif;
+
+    font-size: 14px;
+    line-height: 1.5;
+    font-weight: 400;
+    color: #222222;
+    white-space: nowrap;
+}
+
+
+/* ---------- Initiator / author / package ---------- */
+
+.bill-person-section {
+    clear: both;
+    width: 100%;
+    max-width: none;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.bill-person-section h2 {
+    margin-bottom: 11px;
+    font-size: 11px;
+    line-height: 1.4;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--black);
+}
+
+.bill-person-section p {
+    width: calc(64% - 50px);
+    max-width: none;
+    margin: 0;
+
+    font-family:
+        "Noto Sans Georgian",
+        Arial,
+        sans-serif;
+
+    font-size: 14px;
+    line-height: 1.65;
+    font-weight: 400;
+    color: var(--gray);
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+
+/* ---------- Official link ---------- */
+
+.bill-official-link {
+    clear: both;
+    padding-top: 25px;
+}
+
+.bill-official-link a {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+}
+
+
+/* =========================================================
+   10. SAVE LEGISLATION BUTTON  (bill.html)
+========================================================= */
 
 .bill-save-container {
     margin-top: 28px;
@@ -2754,19 +1196,15 @@ html[lang="ka"] .hero h1 span {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
     min-width: 190px;
     padding: 12px 24px;
-
     background: transparent;
-    border: 1px solid #111;
-    color: #111;
-
+    border: 1px solid var(--black);
+    color: var(--black);
     font-family: inherit;
     font-size: 13px;
     font-weight: 600;
     letter-spacing: 1px;
-
     cursor: pointer;
 
     transition:
@@ -2776,8 +1214,8 @@ html[lang="ka"] .hero h1 span {
 }
 
 .bill-save-button:hover {
-    background: #111;
-    color: #fff;
+    background: var(--black);
+    color: #ffffff;
 }
 
 .bill-save-button:disabled {
@@ -2785,9 +1223,10 @@ html[lang="ka"] .hero h1 span {
     cursor: not-allowed;
 }
 
-/* =====================================================
-   SAVED LEGISLATION PAGE
-===================================================== */
+
+/* =========================================================
+   11. SAVED LEGISLATION  (saved.html)
+========================================================= */
 
 .saved-legislation-page {
     padding: 70px 0 90px;
@@ -2815,33 +1254,20 @@ html[lang="ka"] .hero h1 span {
     line-height: 1.6;
 }
 
-
-/* =====================================================
-   SAVED BILLS LIST
-===================================================== */
-
 .saved-bills-list {
     display: flex;
     flex-direction: column;
     gap: 24px;
 }
 
-
-/* =====================================================
-   SAVED BILL CARD
-===================================================== */
-
 .saved-bill-card {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-
     gap: 40px;
-
     padding: 30px 32px;
-
     border: 1px solid #d9d9d9;
-    background: #fff;
+    background: #ffffff;
 
     transition:
         border-color 0.2s ease,
@@ -2849,14 +1275,9 @@ html[lang="ka"] .hero h1 span {
 }
 
 .saved-bill-card:hover {
-    border-color: #999;
+    border-color: var(--light-gray);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
 }
-
-
-/* =====================================================
-   CARD CONTENT
-===================================================== */
 
 .saved-bill-card-content {
     flex: 1;
@@ -2865,67 +1286,46 @@ html[lang="ka"] .hero h1 span {
 
 .saved-bill-type {
     margin-bottom: 10px;
-
     font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.8px;
     text-transform: uppercase;
-
-    color: #777;
+    color: var(--muted);
 }
 
 .saved-bill-card h2 {
     margin: 0 0 14px;
-
     font-size: 22px;
     line-height: 1.45;
     font-weight: 600;
-
-    color: #111;
+    color: var(--black);
 }
 
 .saved-bill-card p {
     margin: 0;
-
     font-size: 15px;
     line-height: 1.7;
-
-    color: #555;
+    color: #555555;
 }
-
-
-/* =====================================================
-   CARD ACTIONS
-===================================================== */
 
 .saved-bill-card-actions {
     display: flex;
     align-items: center;
     gap: 12px;
-
     flex-shrink: 0;
-
     padding-top: 4px;
 }
-
-
-/* VIEW BUTTON */
 
 .saved-view-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
     min-height: 42px;
     padding: 0 20px;
-
-    border: 1px solid #111;
-
-    background: #111;
-    color: #fff;
-
+    border: 1px solid var(--black);
+    background: var(--black);
+    color: #ffffff;
     text-decoration: none;
-
     font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.8px;
@@ -2937,30 +1337,22 @@ html[lang="ka"] .hero h1 span {
 
 .saved-view-button:hover {
     background: transparent;
-    color: #111;
+    color: var(--black);
 }
-
-
-/* REMOVE BUTTON */
 
 .saved-remove-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
     min-height: 42px;
     padding: 0 20px;
-
-    border: 1px solid #111;
-
+    border: 1px solid var(--black);
     background: transparent;
-    color: #111;
-
+    color: var(--black);
     font-family: inherit;
     font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.8px;
-
     cursor: pointer;
 
     transition:
@@ -2969,116 +1361,58 @@ html[lang="ka"] .hero h1 span {
 }
 
 .saved-remove-button:hover {
-    background: #111;
-    color: #fff;
+    background: var(--black);
+    color: #ffffff;
 }
-
-
-/* =====================================================
-   EMPTY STATE
-===================================================== */
 
 .saved-empty-state {
     padding: 70px 30px;
-
-    border: 1px solid #ddd;
-
+    border: 1px solid #dddddd;
     text-align: center;
 }
 
 .saved-empty-state h2 {
     margin: 0 0 12px;
-
     font-size: 24px;
     font-weight: 600;
 }
 
 .saved-empty-state p {
     margin: 0 0 25px;
-
-    color: #666;
+    color: var(--gray);
     font-size: 15px;
 }
 
 .saved-back-button {
     display: inline-flex;
-
     padding: 12px 22px;
-
-    background: #111;
-    color: #fff;
-
+    background: var(--black);
+    color: #ffffff;
     text-decoration: none;
-
     font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.8px;
 }
 
-
-/* =====================================================
-   ERROR
-===================================================== */
-
 .saved-error {
     padding: 50px 30px;
-
-    border: 1px solid #ddd;
-
+    border: 1px solid #dddddd;
     text-align: center;
 }
 
 .saved-error h2 {
     margin: 0 0 10px;
-
     font-size: 22px;
 }
 
 .saved-error p {
     margin: 0;
-
-    color: #666;
+    color: var(--gray);
 }
 
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media (max-width: 768px) {
-
-    .saved-legislation-page {
-        padding: 45px 0 60px;
-    }
-
-    .saved-legislation-header h1 {
-        font-size: 32px;
-    }
-
-    .saved-bill-card {
-        flex-direction: column;
-        gap: 25px;
-
-        padding: 24px;
-    }
-
-    .saved-bill-card h2 {
-        font-size: 19px;
-    }
-
-    .saved-bill-card-actions {
-        width: 100%;
-    }
-
-    .saved-view-button,
-    .saved-remove-button {
-        flex: 1;
-    }
-
-}
 
 /* =========================================================
-   MY ACCOUNT PAGE
+   12. MY ACCOUNT  (account.html)
 ========================================================= */
 
 .account-nav {
@@ -3128,9 +1462,9 @@ html[lang="ka"] .hero h1 span {
 }
 
 .account-navigation button:hover {
-    background: #bf0603;
-    border-color: #bf0603;
-    color: #fff;
+    background: var(--red);
+    border-color: var(--red);
+    color: #ffffff;
 }
 
 .account-page {
@@ -3145,7 +1479,7 @@ html[lang="ka"] .hero h1 span {
 
 .account-label {
     margin: 0 0 10px;
-    color: #bf0603;
+    color: var(--red);
     font-size: 11px;
     font-weight: 800;
     letter-spacing: 2px;
@@ -3161,7 +1495,7 @@ html[lang="ka"] .hero h1 span {
 
 .account-header > p:last-child {
     margin: 0;
-    color: #888;
+    color: #888888;
     font-size: 15px;
     line-height: 1.7;
 }
@@ -3202,7 +1536,7 @@ html[lang="ka"] .hero h1 span {
 }
 
 .account-info span {
-    color: #888;
+    color: #888888;
     font-size: 14px;
 }
 
@@ -3229,7 +1563,7 @@ html[lang="ka"] .hero h1 span {
 
 .account-description,
 .account-secondary-message {
-    color: #888;
+    color: #888888;
     font-size: 14px;
     line-height: 1.7;
 }
@@ -3264,7 +1598,7 @@ html[lang="ka"] .hero h1 span {
 }
 
 .account-footer a:hover {
-    color: #bf0603;
+    color: var(--red);
 }
 
 .account-page .saved-error {
@@ -3272,9 +1606,344 @@ html[lang="ka"] .hero h1 span {
     line-height: 1.6;
 }
 
-/* MOBILE */
+
+/* =========================================================
+   13. AUTH MODAL
+========================================================= */
+
+.auth-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 400px;
+    padding: 35px;
+    background: var(--black);
+    border: 1px solid #ffffff;
+    color: #ffffff;
+}
+
+.auth-close {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.auth-modal-content h2 {
+    margin: 0 0 25px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.auth-modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.auth-modal-content label {
+    font-size: 13px;
+}
+
+.auth-modal-content input {
+    padding: 12px;
+    background: #000000;
+    border: 1px solid #777777;
+    color: #ffffff;
+    outline: none;
+}
+
+.auth-modal-content input:focus {
+    border-color: #ffffff;
+}
+
+.auth-submit {
+    margin-top: 15px;
+    padding: 12px;
+    background: #ffffff;
+    border: 1px solid #ffffff;
+    color: #000000;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.auth-message {
+    margin-top: 15px;
+    font-size: 13px;
+    text-align: center;
+}
+
+
+/* =========================================================
+   14. GEORGIAN OVERRIDES   html[lang="ka"]
+========================================================= */
+
+html[lang="ka"] .main-nav a {
+    font-family:
+        "Noto Sans Georgian",
+        sans-serif;
+
+    font-size: 15px;
+    font-weight: 600;
+}
+
+html[lang="ka"] .hero h1 {
+    font-family:
+        "Noto Sans Georgian",
+        sans-serif;
+
+    font-size: 58px;
+    line-height: 0.98;
+    font-weight: 700;
+    letter-spacing: -1.2px;
+    font-stretch: condensed;
+    max-width: 680px;
+}
+
+/* "LIVE" სიტყვა (ფერი inline-ია HTML-ში და არ შეცვლილა) */
+html[lang="ka"] .hero h1 span {
+    font-family:
+        "Open Sans",
+        sans-serif;
+
+    display: inline-block;
+    margin-right: 20px;
+    font-size: 58px;
+    font-weight: 800;
+    letter-spacing: -2px;
+}
+
+html[lang="ka"] .hero-description {
+    font-family:
+        "Noto Sans Georgian",
+        sans-serif;
+
+    font-size: 17px;
+    line-height: 1.65;
+    max-width: 650px;
+}
+
+html[lang="ka"] .update-form input,
+html[lang="ka"] .update-form button {
+    font-family:
+        "Noto Sans Georgian",
+        sans-serif;
+}
+
+html[lang="ka"] .about-section h2,
+html[lang="ka"] .process-section h2,
+html[lang="ka"] .legislation-section h2 {
+    font-family:
+        "Noto Sans Georgian",
+        sans-serif;
+
+    letter-spacing: -1px;
+}
+
+html[lang="ka"] .feature h3,
+html[lang="ka"] .process-item h3 {
+    font-family:
+        "Noto Sans Georgian",
+        sans-serif;
+}
+
+html[lang="ka"] .about-text,
+html[lang="ka"] .process-item p,
+html[lang="ka"] .feature p,
+html[lang="ka"] .legislation-section p {
+    font-family:
+        "Noto Sans Georgian",
+        sans-serif;
+}
+
+
+/* =========================================================
+   15. RESPONSIVE
+   (დიდიდან პატარისკენ — რიგი მნიშვნელოვანია)
+========================================================= */
+
+
+/* ---------- ≤ 1450px : header უფრო კომპაქტური ---------- */
+
+@media (max-width: 1450px) {
+
+    .main-nav {
+        gap: 22px;
+        margin-right: 18px;
+    }
+
+    .language-switcher {
+        margin-right: 12px;
+    }
+
+    .header-social {
+        gap: 14px;
+    }
+
+}
+
+
+/* ---------- ≥ 1101px : desktop header (auth / user menu) ---------- */
+
+@media (min-width: 1101px) {
+
+    .auth-buttons,
+    .user-menu {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex: 0 0 auto;
+        gap: 10px;
+        margin: 0 18px 0 0;
+        white-space: nowrap;
+    }
+
+    .user-menu #userEmail {
+        display: none;
+    }
+
+    .user-menu .login-button,
+    .auth-buttons .login-button,
+    .auth-buttons .signup-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 40px;
+        padding: 8px 12px;
+        white-space: nowrap;
+        text-decoration: none;
+        box-sizing: border-box;
+    }
+
+}
+
+@media (min-width: 1101px) and (max-width: 1450px) {
+
+    .auth-buttons,
+    .user-menu {
+        gap: 8px;
+        margin-right: 12px;
+    }
+
+    .user-menu .login-button,
+    .auth-buttons .login-button,
+    .auth-buttons .signup-button {
+        padding-right: 9px;
+        padding-left: 9px;
+        font-size: 11px;
+    }
+
+}
+
+
+/* ---------- ≤ 1100px ---------- */
+
+@media (max-width: 1100px) {
+
+    .main-nav {
+        margin-right: 22px;
+    }
+
+    .language-switcher {
+        margin-right: 18px;
+    }
+
+    .header-social {
+        gap: 16px;
+    }
+
+}
+
+
+/* ---------- ≤ 850px : bill details (tablet) ---------- */
+
+@media (max-width: 850px) {
+
+    .bill-back {
+        margin-bottom: 38px;
+    }
+
+    .bill-details-header {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .bill-description-section {
+        float: none;
+        width: 100%;
+        padding: 26px 0;
+    }
+
+    .bill-information {
+        float: none;
+        width: 100%;
+        padding: 26px 0;
+        border-top: none;
+    }
+
+    .bill-information-grid {
+        column-gap: 40px;
+        row-gap: 24px;
+    }
+
+    .bill-person-section p {
+        width: 100%;
+    }
+
+}
+
+
+/* ---------- ≤ 768px : saved legislation ---------- */
+
+@media (max-width: 768px) {
+
+    .saved-legislation-page {
+        padding: 45px 0 60px;
+    }
+
+    .saved-legislation-header h1 {
+        font-size: 32px;
+    }
+
+    .saved-bill-card {
+        flex-direction: column;
+        gap: 25px;
+        padding: 24px;
+    }
+
+    .saved-bill-card h2 {
+        font-size: 19px;
+    }
+
+    .saved-bill-card-actions {
+        width: 100%;
+    }
+
+    .saved-view-button,
+    .saved-remove-button {
+        flex: 1;
+    }
+
+}
+
+
+/* ---------- ≤ 700px : my account ---------- */
 
 @media (max-width: 700px) {
+
     .account-nav {
         align-items: flex-start;
         flex-direction: column;
@@ -3319,100 +1988,439 @@ html[lang="ka"] .hero h1 span {
         box-sizing: border-box;
         text-align: center;
     }
+
 }
 
-/* =========================================================
-   LEGISWATCH HEADER — FINAL LAYOUT OVERRIDE
-   Keep language, account actions and social icons aligned
-========================================================= */
 
-@media (min-width: 1101px) {
+/* ---------- ≤ 550px : MOBILE ---------- */
+
+@media (max-width: 550px) {
+
+    .container {
+        width: calc(100% - 30px);
+        max-width: none;
+    }
+
+
+    /* ----- Header ----- */
+
+    .site-header {
+        height: auto;
+        min-height: 100px;
+        padding: 18px 0;
+    }
+
     .header-inner {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 0;
+        height: auto;
+        flex-direction: column;
+        gap: 20px;
     }
 
     .logo {
-        flex: 0 0 auto;
-    }
-
-    .main-nav {
-        flex: 0 1 auto;
-        margin-left: auto;
-        margin-right: 24px;
-        gap: 30px;
-    }
-
-    .language-switcher {
-        flex: 0 0 auto;
-        margin: 0 18px 0 0;
-    }
-
-    .auth-buttons,
-    .user-menu {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        flex: 0 0 auto;
         gap: 10px;
-        margin: 0 18px 0 0;
-        white-space: nowrap;
+        height: auto;
+        min-width: 0;
     }
 
-    .user-menu #userEmail {
-        display: none;
+    .logo-mark {
+        width: 68px;
+        height: 40px;
     }
 
-    .user-menu .login-button,
-    .auth-buttons .login-button,
-    .auth-buttons .signup-button {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 40px;
-        padding: 8px 12px;
-        white-space: nowrap;
-        text-decoration: none;
-        box-sizing: border-box;
+    .logo-info {
+        min-width: 0;
     }
 
-    .header-social {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        flex: 0 0 auto;
-        gap: 18px;
-        margin-left: 0;
+    .logo-text {
+        font-size: 29px;
+        letter-spacing: -1px;
     }
-}
 
-@media (min-width: 1101px) and (max-width: 1450px) {
+    .logo-tagline {
+        font-size: 7px;
+        letter-spacing: 1.4px;
+    }
+
     .main-nav {
-        gap: 22px;
-        margin-right: 18px;
-    }
-
-    .language-switcher {
-        margin-right: 12px;
-    }
-
-    .auth-buttons,
-    .user-menu {
-        gap: 8px;
-        margin-right: 12px;
-    }
-
-    .user-menu .login-button,
-    .auth-buttons .login-button,
-    .auth-buttons .signup-button {
-        padding-right: 9px;
+        width: 100%;
         padding-left: 9px;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+    }
+
+    .main-nav a {
+        font-size: 12px;
+        padding: 6px 0;
+        letter-spacing: 0.3px;
+    }
+
+    .main-nav a::after {
+        bottom: 0;
+    }
+
+
+    /* ----- Hero ----- */
+
+    .hero {
+        min-height: auto;
+        padding: 35px 0 60px;
+    }
+
+    .hero-inner {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+
+    .hero-content {
+        width: 100%;
+        padding-right: 0;
+    }
+
+    .hero h1 {
+        width: 100%;
+        max-width: none;
+        font-size: 45px;
+        line-height: 0.98;
+        letter-spacing: -2px;
+    }
+
+    .hero-description {
+        width: 100%;
+        max-width: none;
+        font-size: 16px;
+        line-height: 1.7;
+        margin-bottom: 30px;
+    }
+
+    .update-form {
+        flex-direction: row;
+        max-width: none;
+    }
+
+    .update-form input {
+        width: 55%;
+        padding: 0 14px;
+        font-size: 13px;
+    }
+
+    .update-form .outline-button {
+        width: 45%;
+        min-width: 0;
+        padding: 0 16px;
+        gap: 10px;
         font-size: 11px;
     }
 
-    .header-social {
-        gap: 14px;
+    .button-arrow {
+        font-size: 20px;
     }
+
+    .hero-visual {
+        width: 100%;
+        height: auto;
+        margin-top: 50px;
+        padding: 0;
+        justify-content: center;
+    }
+
+    .law-sketch {
+        width: 100%;
+        max-width: none;
+        transform: none;
+    }
+
+
+    /* ----- Features ----- */
+
+    .features {
+        padding: 45px 0;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+        width: 100%;
+    }
+
+    .feature {
+        width: 100%;
+        min-width: 0;
+        gap: 22px;
+        padding: 25px 0;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .feature:first-child {
+        padding-left: 0;
+    }
+
+    .feature:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .feature-icon {
+        width: 42px;
+        min-width: 42px;
+        height: 42px;
+    }
+
+    .feature-icon svg {
+        width: 38px;
+        height: 38px;
+    }
+
+    .feature p {
+        max-width: none;
+    }
+
+
+    /* ----- About ----- */
+
+    .about-section {
+        padding: 90px 0;
+    }
+
+    .about-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        width: 100%;
+    }
+
+    .section-heading {
+        width: 100%;
+    }
+
+    .section-heading h2 {
+        font-size: 38px;
+        letter-spacing: -2px;
+    }
+
+    .about-text {
+        width: 100%;
+        max-width: none;
+        padding-top: 0;
+    }
+
+    .about-text p {
+        font-size: 16px;
+        line-height: 1.8;
+    }
+
+    .about-text .about-lead {
+        font-size: 22px;
+        line-height: 1.45;
+    }
+
+
+    /* ----- How it works ----- */
+
+    .process-section {
+        padding: 90px 0;
+    }
+
+    .process-heading {
+        width: 100%;
+        max-width: none;
+        margin-bottom: 50px;
+    }
+
+    .process-heading h2 {
+        font-size: 38px;
+        line-height: 1.03;
+        letter-spacing: -2px;
+    }
+
+    .process-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+        width: 100%;
+    }
+
+    .process-item {
+        width: 100%;
+        min-width: 0;
+        padding: 30px 0;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .process-item:last-child {
+        border-bottom: none;
+    }
+
+    .process-top {
+        width: 100%;
+        margin-bottom: 25px;
+    }
+
+    .process-item h3 {
+        font-size: 19px;
+        line-height: 1.25;
+        letter-spacing: 2.5px;
+    }
+
+    .process-item p {
+        max-width: none;
+        line-height: 1.8;
+    }
+
+
+    /* ----- Recent legislation ----- */
+
+    .legislation-section {
+        padding: 90px 0;
+    }
+
+    .legislation-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 25px;
+        margin-bottom: 35px;
+    }
+
+    .legislation-header h2 {
+        font-size: 38px;
+        line-height: 1.05;
+        letter-spacing: 3px;
+    }
+
+    .legislation-header p {
+        line-height: 1.7;
+    }
+
+    .view-all {
+        font-size: 12px;
+    }
+
+    .search-area {
+        flex-direction: row;
+        margin-bottom: 25px;
+    }
+
+    .search-area input {
+        min-width: 0;
+        width: auto;
+        padding: 0 14px;
+        font-size: 14px;
+    }
+
+    .search-area button {
+        width: 110px;
+        min-width: 110px;
+        height: 52px;
+    }
+
+    .bill-row {
+        width: 100%;
+        min-width: 0;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 22px 0;
+    }
+
+    .bill-name {
+        width: 100%;
+        min-width: 0;
+        grid-column: 1;
+        padding: 0;
+        font-size: 17px;
+        overflow-wrap: anywhere;
+    }
+
+    .bill-status {
+        grid-column: 1;
+        grid-row: auto;
+        font-size: 11px;
+        white-space: normal;
+    }
+
+    .bill-info {
+        grid-column: 1;
+        grid-row: auto;
+        font-size: 12px;
+        white-space: normal;
+    }
+
+    .bill-arrow {
+        grid-column: 1;
+        grid-row: auto;
+        padding-right: 0;
+        text-align: left;
+        font-size: 24px;
+    }
+
+    .pagination {
+        gap: 20px;
+        margin-top: 35px;
+    }
+
+
+    /* ----- Footer ----- */
+
+    .footer {
+        padding: 45px 0;
+    }
+
+    .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+    }
+
+    .footer-brand {
+        align-items: center;
+    }
+
+    .footer-copy {
+        text-align: center;
+    }
+
+
+    /* ----- Bill details ----- */
+
+    .bill-back {
+        margin-bottom: 32px;
+    }
+
+    .bill-details-header {
+        margin-bottom: 25px;
+    }
+
+    .bill-description-section {
+        padding: 22px 0;
+    }
+
+    .bill-description-section h2,
+    .bill-person-section h2 {
+        font-size: 10px;
+        letter-spacing: 2.5px;
+    }
+
+    .bill-description-section p {
+        font-size: 14px;
+    }
+
+    .bill-information {
+        padding: 22px 0;
+    }
+
+    .bill-information-grid {
+        grid-template-columns: 1fr;
+        row-gap: 20px;
+    }
+
+    .bill-person-section {
+        padding: 22px 0;
+    }
+
+    .bill-person-section p {
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+    .bill-official-link {
+        padding-top: 22px;
+    }
+
 }
